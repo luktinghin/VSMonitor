@@ -1,0 +1,154 @@
+@font-face {
+  font-family: Brandon Text;
+  src: url(fonts/BrandonText-Bold.otf);
+  font-weight: bold;
+  font-display: swap;
+  unicode-range:  U+000-5FF;
+}
+@font-face {
+   font-family: SourceSans;
+   src: url(fonts/SourceSans3-Regular.otf.woff2);
+   font-display: swap;
+   unicode-range: U+000-5FF;
+}
+
+@font-face {
+   font-family: SourceSans;
+   src: url(fonts/SourceSans3-Bold.otf.woff2);
+   font-weight: bold;
+   font-display: swap;
+   unicode-range: U+000-5FF;
+}
+
+@font-face {
+   font-family: SourceSans;
+   src: url(fonts/SourceSans3-It.otf.woff2);
+   font-style: italic;
+   font-display: swap;
+   unicode-range: U+000-5FF;
+}
+
+@font-face {
+   font-family: SourceSans;
+   src: url(fonts/SourceSans3-BoldIt.otf.woff2);
+   font-weight: bold;
+   font-style: italic;
+   font-display: swap;
+   unicode-range: U+000-5FF;
+}
+
+* {
+   -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+           box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+          
+}
+
+html {
+  -webkit-text-size-adjust:100%; /*fix iphone landscape font-size 20px bug */
+  overscroll-behavior: none;
+}
+
+body {
+  font-family:  "SourceSans", "Calibri", "Trebuchet MS", "Lucida Sans", sans-serif;
+  font-size: 16px; 
+  margin: 0px;
+  background:#303030;
+  overscroll-behavior-y: contain;
+}
+
+
+/* block to prevent pinch zoom and overscroll (pull down to refresh in iOS)*/
+/* prevent pull-to-refresh for Safari 16+ */
+@media screen and (pointer: coarse) {
+  @supports (-webkit-backdrop-filter: blur(1px)) and (overscroll-behavior-y: none)  {
+    html {
+      min-height: 100.3%;
+      overscroll-behavior-y: none;
+    }
+  }
+}
+/* prevent pull-to-refresh for Safari 9~15 */
+@media screen and (pointer: coarse) {
+  @supports (-webkit-backdrop-filter: blur(1px)) and (not (overscroll-behavior-y: none))  {
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      margin: 0px;
+      max-height: 100%; /* or `height: calc(100% - 16px);` if body has default margin */
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    /* in this case to disable pinch-zoom, set `touch-action: pan-x pan-y;` on `body` instead of `html` */
+  }
+}
+
+/* prevent pinch-zoom for Chrome 36+, Safari 13+ */
+html {
+  touch-action: pan-x pan-y;
+  min-height: 100%; /* prevent pinch-zoom at page bottom */
+}
+
+/* prevent pull-to-refresh for Chrome 63+ */
+body{
+  overscroll-behavior-y: none;
+}
+
+/* end of pinch zoom pull to refresh block */
+
+button, select, input {
+  font-family:  "SourceSans", "Calibri", "Trebuchet MS", "Lucida Sans", sans-serif;
+}
+#main-body {
+  padding: 10px;
+}
+
+.chart-outer {
+  display: flex;
+  gap: 10px;
+}
+.chart-left {
+  flex-basis: 75%;
+  padding: 10px;
+  border-radius: 9px;
+  border: 1px solid #666;
+  background: #202020;
+  color: white;
+}
+.chart-right {
+  flex-basis: 25%;
+  padding: 10px;
+  border-radius: 9px;
+  border: 1px solid #666;
+  background: #202020;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.chart-right-upper {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #666;
+}
+.chart-right-lower {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  text-align: center;
+}
+.chart-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid #666;
+  width: 100%;
+}
+.chart-container {
+  height: 400px;
+}
