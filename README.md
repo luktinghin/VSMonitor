@@ -22,3 +22,6 @@ This function receives 5 parameters. It receives CSV data and then pre-processes
 
 #### customFunction
 Currently, for Demo purposes, this generates the chart and info output based on the CSV data received.
+
+## Footnote
+The data sources for this demonstration are from BIS data from actual patient, and CSV files downloaded from GitHub/VSChart project.
