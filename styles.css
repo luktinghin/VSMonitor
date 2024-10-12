@@ -112,6 +112,7 @@ button, select, input {
 .chart-outer {
   display: flex;
   gap: 10px;
+  margin: 10px 0;
 }
 .chart-left {
   flex-basis: 75%;
@@ -150,5 +151,5 @@ button, select, input {
   width: 100%;
 }
 .chart-container {
-  height: 400px;
+  height: 300px;
 }

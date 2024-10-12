@@ -13,14 +13,22 @@
 	<meta name="description" content="Graphical Display for VSCapture">
     <meta name="keywords" content="VSCapture">
     <meta name="author" content="Terence Luk">
-    <title>VSCapture</title>
+    <title>VSdisplay - VSCapture Data Visualization Tool</title>
 </head>
 <body>
 	<script src="index.js"></script>
 	<script src="chart.min.js"></script>
 	<script src="chartjs-plugin-crosshair.min.js"></script>
+	<script type="module" src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
 	<div id="main-body">
-		<x-chart-component id="display1"></x-chart-component>
+		<!--<x-chart-component id="display1"></x-chart-component>-->
+	</div>
+	<div id="card_actions">
+		<button onclick="createFrame();createFrame();createFrame();">Create 3 frames</button>
+		<button onclick="customFunction(AS3Data,'Time','ECG_HR',1)">Feed ECG_HR data from AS3Data into Frame 1</button>
+		<button onclick="customFunction(BISData,'Time','BIS',2)">Feed BIS data from BISData into Frame 2</button>
+		<button onclick="customFunction(MPData,'Time','NOM_PLETH_PULS_RATE',3,'MMDDYYYY')">Feed NOM_PLETH_PULS_RATE from MPData into Frame 3</button>
 	</div>
 </body>
 </html>
