@@ -268,8 +268,8 @@ function setConfig(idnum) {
 	document.getElementById("chart" + idnum + "selectname").update();
 	document.getElementById("chart" + idnum + "selectvariable").update();
 	if (tempSource != undefined) {
-		document.getElementById("chart" + idnum + "selectname").value = tempSource;
-		document.getElementById("chart" + idnum + "selectvariable").value = tempVariable;
+		document.querySelector("#chart" + idnum + "selectname select").value = tempSource;
+		document.querySelector("#chart" + idnum + "selectvariable select").value = tempVariable;
 	}
 }
 
