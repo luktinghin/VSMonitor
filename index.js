@@ -390,7 +390,7 @@ commonChartOptions = {
 	    			time: {
 	    				unit: 'minute',
 	    				stepSize: 30
-	    			}
+	    			},
 					title: {
 						display: false,
 						text:'Time'
