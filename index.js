@@ -156,6 +156,7 @@ function renderData(sourceObject, xDataName, yDataName, idnum, param1) {
 	chartObjects[idnum].update();
 	//write to infoobject
 	infoObjects[idnum].label = yDataName;
+	infoObjects[idnum].xMin = 
 	updateInfo(idnum);
 }
 
