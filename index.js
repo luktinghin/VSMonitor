@@ -229,7 +229,7 @@ function setConfig(idnum) {
 }
 
 function applyConfig(idnum) {
-	tempIndex1 = document.querySelector("#chart" + idnum + "selectname" + " select").selectedIndex;
+	tempIndex = document.querySelector("#chart" + idnum + "selectname" + " select").selectedIndex;
 	tempSource = sourceData(tempIndex);
 	tempVariable = document.querySelector("#chart" + idnum + "selectvariable" + " select").value;
 	renderData(tempSource,"Time",tempVariable, idnum); //omit param1 first
