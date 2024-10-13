@@ -374,9 +374,10 @@ function handleDrop3(e) {
   }
   for (count1 = 0; count1 < fileEntry.length; count1++) {
   	setTimeout(function() {
-  		handleFile(fileEntry[count1], readData3, errorData, count1);
   		console.log(1000+(1000*count1));
   		console.log(fileEntry[count1]);
+  		handleFile(fileEntry[count1], readData3, errorData, count1);
+
   	},1000+(1000*count1));
   }
 }
