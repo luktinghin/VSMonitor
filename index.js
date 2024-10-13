@@ -5,10 +5,8 @@
 //drag and drop functionality
  var dropArea = document.getElementById("VSdropArea");
  //var dropArea2 = document.getElementById("VSdropArea2");
- var fileEntry;
- var fileEntry2;
+ var fileEntry = new Array();
  var fileList;
- var fileList2;
  VSimportdata = {};
  VSimportparams = {};
 
@@ -367,12 +365,12 @@ function handleDrop3(e) {
   items = dt.items;
   document.getElementById("VSimportmessage").innerHTML = "";
   for (count = 0; count < items.length; count++) {
-  	  fileEntry = items[count].webkitGetAsEntry();
+  	  fileEntry[count] = items[count].webkitGetAsEntry();
   		console.log(items[count]);
   		console.log(items[count].type);
   		console.log("drop event fired - file " + count);
-  		console.log(fileEntry);
-  		handleFile(fileEntry, readData3, errorData);
+  		console.log(fileEntry[count]);
+  		handleFile(fileEntry[count], readData3, errorData);
   }
 
 }
@@ -399,9 +397,9 @@ function readData3(data) {
 		tempLength = sourceData[tempCount].length - 1;
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
 		if ((sourceData[tempCount].length > 0) && (sourceData[tempCount][0].Time != undefined)) {
-			document.getElementById("VSimportmessage").innerHTML += fileEntry.name + " - data loaded successfully: " + tempLength + " entries<br>";	
+			document.getElementById("VSimportmessage").innerHTML += fileEntry[fileEntry.length-1].name + " - data loaded successfully: " + tempLength + " entries<br>";	
 		} else {
-			document.getElementById("VSimportmessage").innerHTML += fileEntry.name + " - file read but no suitable data detected.<br>";	
+			document.getElementById("VSimportmessage").innerHTML += fileEntry[fileEntry.length-1].name + " - file read but no suitable data detected.<br>";	
 		}
 		sourceDataInfo.push({});
 		sourceDataInfo[tempCount].name = fileEntry.name;
@@ -411,7 +409,7 @@ function readData3(data) {
 			sourceDataInfo[tempCount].variables.splice(tempTimeIndex,1);
 		}
 	} else {
-		document.getElementById("VSimportmessage").innerHTML = "Fatal error."
+		document.getElementById("VSimportmessage").innerHTML = "Fatal error: unrecognized file."
 	}
 }
 
