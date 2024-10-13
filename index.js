@@ -55,7 +55,7 @@ class SelectComponent extends HTMLElement {
 		let tempId = this.getAttribute("dataid") * 1;
 		let tempEntries = sourceDataInfo[tempId][this.getAttribute("datakey")];
 		let contents = "<select>";
-		for (count = 0; count<tempEntries.length; count++) {
+		for (let count = 0; count<tempEntries.length; count++) {
 			contents = contents.concat("<option value='" + tempEntries[count] + "'>" + tempEntries[count] + "</option>");	
 		}
 		contents = contents.concat("</select>");
