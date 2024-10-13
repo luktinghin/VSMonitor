@@ -101,10 +101,10 @@ function createChart(param, inputData) {
 	    		borderWidth:7,
 	    		pointRadius:0,
 	    		borderJoinStyle: 'round',
-	    		borderColor: 'rgb(231, 50, 39,0.7)',
-	    		backgroundColor: 'rgb(231, 50, 39,0.4)',
-	    		pointBorderColor: 'rgb(231, 50, 39,0.8)',
-	    		pointBackgroundColor: 'rgb(231, 50, 39,0.8)',
+	    		borderColor: 'rgb(231, 50, 39,1)',
+	    		backgroundColor: 'rgb(231, 50, 39,1)',
+	    		pointBorderColor: 'rgb(231, 50, 39,1)',
+	    		pointBackgroundColor: 'rgb(231, 50, 39,1)',
 	    		fill: false,
 	    		parsing: false
 	    	}]
@@ -152,6 +152,7 @@ function renderData(sourceObject, xDataName, yDataName, idnum, param1) {
 	}
 	//parsed display element
 	document.getElementById("chart-header-" + idnum).innerHTML = yDataName;
+	chartObjects[idnum].data.datasets[0].label = yDataName;
 	chartObjects[idnum].data.datasets[0].data = dataObject;
 	chartObjects[idnum].options.scales.y.title.text = yDataName;
 	chartObjects[idnum].update();
@@ -211,16 +212,46 @@ function preprocessTime(inputTime,param1) {
 function setConfig(idnum) {
 	contents = `
 		<div>
-			<table>
-				<tr>
-					<td>Data source</td>
-					<td><x-select id="chart${idnum}selectname" idnum="${idnum}" datakey="name" dataid="0" onchange="setConfigVariables(${idnum});"></x-select></td>
-				</tr>
-				<tr>
-					<td>Variable</td>
-					<td><x-select id="chart${idnum}selectvariable" idnum="${idnum}" datakey="variables" dataid="0"></x-select></td>
-				</tr>
-			</table>
+			<div style="display:flex;justify-content:space-around">
+				<div>
+					<table>
+						<tr>
+							<td>Data source</td>
+							<td><x-select id="chart${idnum}selectname" idnum="${idnum}" datakey="name" dataid="0" onchange="setConfigVariables(${idnum});"></x-select></td>
+						</tr>
+						<tr>
+							<td>Variable</td>
+							<td><x-select id="chart${idnum}selectvariable" idnum="${idnum}" datakey="variables" dataid="0"></x-select></td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<table>
+						<tr>
+							<td>yAxis Min</td>
+							<td><input type='number' id="chart${idnum}ymin"></td>
+						</tr>
+						<tr>
+							<td>yAxis Max</td>
+							<td><input type='number' id="chart${idnum}ymax"></td>
+						</tr>
+						<tr>
+							<td>xAxis stepsize</td>
+							<td><input type='number' id="chart${idnum}xaxisstepsize"></td>
+						</tr>
+						<tr>
+							<td>Color</td>
+							<td>
+								<select id='chart${idnum}color'>
+									<option value='rgb(231, 50, 39,1)'>Red</option>
+									<option value='rgba(21,101,192,1)'>Blue</option>
+									<option value='rgba(251,192,45,1)'>Yellow</option>
+									<option value='rgb(9, 203, 93,1)'>Green</option>
+								</select>
+							</td>
+					</table>
+				</div>
+			</div>
 			<div>
 				<a class="button" onclick="applyConfig(${idnum});hidemodal('modalDialog')"">Proceed</a>
 				<a class="button" onclick="hidemodal('modalDialog')">Cancel</a>
@@ -234,10 +265,23 @@ function setConfig(idnum) {
 
 function applyConfig(idnum) {
 	if (chartObjects[idnum] == undefined) createChart(idnum);
+	
 	tempIndex = document.querySelector("#chart" + idnum + "selectname" + " select").selectedIndex;
 	tempSource = sourceData[tempIndex];
 	tempVariable = document.querySelector("#chart" + idnum + "selectvariable" + " select").value;
+
+	infoObjects[idnum].colorvalue = document.querySelector("#chart" + idnum + "color").value;;
+	infoObjects[idnum].yAxisMinValue = document.querySelector("#chart" + idnum + "ymin").value;
+	infoObjects[idnum].yAxisMaxValue = document.querySelector("#chart" + idnum + "ymax").value;
+	infoObjects[idnum].xAxisStepSize = document.querySelector("#chart" + idnum + "xaxisstepsize").value;
+
 	renderData(tempSource,"Time",tempVariable, idnum); //omit param1 first
+
+	//complete the display adjustements
+	chartObjects[idnum].options.scales.y.min = infoObjects[idnum].yAxisMinValue;
+	chartObjects[idnum].options.scales.y.max = infoObjects[idnum].yAxisMaxValue;
+	chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize;
+	chartObjects[idnum].data.datasets[0].borderColor = infoObjects[idnum].colorvalue;
 }
 
 function setConfigVariables(idnum) {
@@ -422,23 +466,20 @@ commonChartOptions = {
 			    tooltip: {
 			    	mode: 'index',
 			    	intersect: false,
-			    	footerFont: {
-			    		weight: 'normal',
-			    		size: 10
-			    	},
-	            	filter: function(tooltipItem, data) {
-	            		var index = tooltipItem.datasetIndex;
-	            		if ((index >= 2) && (index <=5)) {
-	            			return true;
-	            		} else {
-	            			return false;
-	            		}
-	            	},
 	            	position: 'nearest',
 	            	caretSize: 0,
 	            	backgroundColor: 'rgba(0,0,0,0.5)',
 					callbacks: {
-	                	
+	                	title: function(context) {
+	                		text = new Date(context[0].parsed.x).toLocaleTimeString();
+	                		return text;
+	                	}, 
+	                	label: function(context) {
+	                		label = context.dataset.label || '';
+	                		label += ": ";
+	                		label += context.parsed.y;
+	                		return label;
+	                	}
 	                }
 			    },
 		    	crosshair: {
