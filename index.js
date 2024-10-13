@@ -53,8 +53,16 @@ class SelectComponent extends HTMLElement {
 
 	update() {
 		let tempId = this.getAttribute("dataid") * 1;
-		let tempEntries = sourceDataInfo[tempId][this.getAttribute("datakey")];
-		let contents = "<select>";
+		let idnum = this.getAttribute("idnum");
+		if (this.getAttribute("datakey") == "name") {
+			let tempEntries = new Array();
+			for (let countA = 0; countA < sourceDataInfo.length; countA++) {
+				tempEntries.push(sourceDataInfo[countA].name);
+			}
+		} else if (this.getAttribute("datakey") == "variables") {
+			let tempEntries = sourceDataInfo[tempId].variables;	
+		}
+		let contents = "<select id='chart" + idnum + "select" + this.getAttribute("datakey") + "''>";
 		for (let count = 0; count<tempEntries.length; count++) {
 			contents = contents.concat("<option value='" + tempEntries[count] + "'>" + tempEntries[count] + "</option>");	
 		}
@@ -203,6 +211,29 @@ function preprocessTime(inputTime,param1) {
     }
   }
 
+function setConfig(idnum) {
+	contents = `
+		<div>
+			<table>
+				<tr>
+					<td>Data source</td>
+					<td><x-select idnum="${idnum}" datakey="name" dataid="0"></x-select></td>
+				</tr>
+				<tr>
+					<td>Variable</td>
+					<td><x-select idnum="${idnum}" datakey="variables" dataid="0"></x-select></td>
+				</tr>
+			</table>
+			<div>
+				<a class="button">Proceed</a>
+				<a class="button">Cancel</a>
+			</div>
+		</div>
+	`;
+	displayDialog("Config parameter " + idnum, contents);
+	document.getElementById("chart" + idnum + "selectname").update();
+	document.getElementById("chart" + idnum + "selectvariables").update();
+}
 
 function displayDialog(dialogTitle, dialogContent) {
 	const ElTitle = document.querySelector("#modalDialog .title");
