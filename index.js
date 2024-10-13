@@ -269,6 +269,7 @@ function setConfig(idnum) {
 	document.getElementById("chart" + idnum + "selectvariable").update();
 	if (tempSource != undefined) {
 		document.querySelector("#chart" + idnum + "selectname select").value = tempSource;
+		document.getElementById("chart" + idnum + "selectvariable").update();
 		document.querySelector("#chart" + idnum + "selectvariable select").value = tempVariable;
 	}
 }
