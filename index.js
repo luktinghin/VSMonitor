@@ -45,7 +45,7 @@ class SelectComponent extends HTMLElement {
 	connectedCallback() {
 		let tempId = this.getAttribute("dataid") * 1;
 		let tempEntries = testObject[tempId][this.getAttribute("datakey")];
-		let contents = "<select>";
+		let contents = "<select id='chart" + idnum + "select" + this.getAttribute("datakey") + "''>";
 		contents = contents.concat("<option value='" + tempEntries[0] + "'>" + tempEntries[0] + "</option>");
 		contents = contents.concat("</select>");
 		this.innerHTML = contents;
