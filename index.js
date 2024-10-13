@@ -408,7 +408,7 @@ function readData3(data, param, filetype) {
 		} else {
 			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param].name + " - file read but no suitable data detected.<br>";	
 		}
-		sourceDataInfo.push({});
+		sourceDataInfo[param] = {};
 		sourceDataInfo[param].name = fileEntry[param].name;
 		sourceDataInfo[param].variables = Object.keys(sourceData[param][0]);
 		tempTimeIndex = sourceDataInfo[param].variables.indexOf("Time");
