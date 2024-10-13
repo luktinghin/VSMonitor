@@ -149,6 +149,8 @@ button, select, input {
   font-weight: bold;
   border-bottom: 1px solid #666;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 .chart-container {
   height: 300px;
@@ -352,7 +354,20 @@ a.button.tinybutton:hover, a.button.tinybutton:active {
 a.button.tinybutton > i {
   padding-right: 3px;
 }
+.button.paramoptions {
+  background: transparent;
+  text-align: left;
+  border-color: transparent;
+  color: #fff;
+  min-width: 0px;
+  padding: 4px 8px 4px 8px;
+  margin: 0px;
+}
 
+.button.paramoptions:hover, .button.paramoptions:active {
+  background:transparent;
+  border-color:#ddd;
+}
 /*VSimportdialog code */
 #VSmodalscreencontainer {
   position:relative;

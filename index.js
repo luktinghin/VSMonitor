@@ -21,7 +21,8 @@ class ChartComponent extends HTMLElement {
 		<div class="chart-outer">
 			<div class="chart-left">
 				<div class='chart-header' id='chart-header-${num}'>
-					Element ${num}
+					<div style="">Parameter ${num}</div>
+					<div style="float:right;font-size:0.75rem;text-align:right"><a class="button paramoptions" onclick="setConfig(${num})"><i style="padding-right:6px" class="fas fa-cog"></i>Options</a></div>
 				</div>
 				<div class='chart-container' id='chart-container-${num}'>
 					<canvas id="chart${num}">
