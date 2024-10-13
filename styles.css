@@ -154,6 +154,7 @@ button, select, input {
 }
 .chart-container {
   height: 200px;
+  width: 99%;
 }
 
 /*modal css*/

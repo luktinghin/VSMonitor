@@ -387,6 +387,10 @@ commonChartOptions = {
 	    			ticks: {
 	    				color: "rgba(255,255,255,0.6)"
 	    			},
+	    			time: {
+	    				unit: 'minute',
+	    				stepSize: 30
+	    			}
 					title: {
 						display: false,
 						text:'Time'
