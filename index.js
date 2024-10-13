@@ -370,18 +370,17 @@ function handleDrop3(e) {
   		console.log(items[count].type);
   		console.log("drop event fired - file " + count);
   		console.log(fileEntry[count]);
-  		handleFile(fileEntry[count], readData3, errorData);
+  		handleFile(fileEntry[count], readData3, errorData, count);
   }
 
 }
 
-function handleFile(entry, successCallback, errorCallback) {
+function handleFile(entry, successCallback, errorCallback, param) {
 	entry.file(function (file) {
 		console.log('fileEntry File Event fired');
 		readerX = new FileReader();
 		readerX.onload = function() {
-			console.log(readerX.result[0]);
-			successCallback(readerX.result);
+			successCallback(readerX.result, param);
 		}
 		readerX.onerror = function() {
 			errorCallback(readerX.error);
@@ -393,19 +392,19 @@ function handleFile(entry, successCallback, errorCallback) {
 
 
 
-function readData3(data) {
+function readData3(data, param) {
 	if (VSimportparams.fileType == "text/csv") {
 		sourceData.push(CSVtoJSON(data));
 		tempCount = sourceData.length - 1;
 		tempLength = sourceData[tempCount].length - 1;
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
 		if ((sourceData[tempCount].length > 0) && (sourceData[tempCount][0].Time != undefined)) {
-			document.getElementById("VSimportmessage").innerHTML += fileEntry[tempCount].name + " - data loaded successfully: " + tempLength + " entries<br>";	
+			document.getElementById("VSimportmessage").innerHTML += fileEntry[param].name + " - data loaded successfully: " + tempLength + " entries<br>";	
 		} else {
-			document.getElementById("VSimportmessage").innerHTML += fileEntry[tempCount].name + " - file read but no suitable data detected.<br>";	
+			document.getElementById("VSimportmessage").innerHTML += fileEntry[param].name + " - file read but no suitable data detected.<br>";	
 		}
 		sourceDataInfo.push({});
-		sourceDataInfo[tempCount].name = fileEntry[tempCount].name;
+		sourceDataInfo[tempCount].name = fileEntry[param].name;
 		sourceDataInfo[tempCount].variables = Object.keys(sourceData[tempCount][0]);
 		tempTimeIndex = sourceDataInfo[tempCount].variables.indexOf("Time");
 		if (tempTimeIndex > -1) {
