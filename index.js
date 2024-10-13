@@ -277,9 +277,9 @@ function applyConfig(idnum) {
 	renderData(tempSource,"Time",tempVariable, idnum); //omit param1 first
 
 	//complete the display adjustements
-	if (infoObjects[idnum].yAxisMinValue != undefined) chartObjects[idnum].options.scales.y.min = infoObjects[idnum].yAxisMinValue *1;
-	if (infoObjects[idnum].yAxisMaxValue != undefined) chartObjects[idnum].options.scales.y.max = infoObjects[idnum].yAxisMaxValue *1;
-	//if (infoObjects[idnum].xAxisStepSize != undefined) chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize *1;
+	if (infoObjects[idnum].yAxisMinValue != '') chartObjects[idnum].options.scales.y.min = infoObjects[idnum].yAxisMinValue *1;
+	if (infoObjects[idnum].yAxisMaxValue != '') chartObjects[idnum].options.scales.y.max = infoObjects[idnum].yAxisMaxValue *1;
+	if (infoObjects[idnum].xAxisStepSize != '') chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize *1;
 	chartObjects[idnum].data.datasets[0].borderColor = infoObjects[idnum].colorvalue;
 
 	chartObjects[idnum].update();
@@ -434,7 +434,7 @@ commonChartOptions = {
 	    			},
 	    			time: {
 	    				unit: 'minute',
-	    				stepSize: 30
+	    				stepSize: 10
 	    			},
 					title: {
 						display: false,
