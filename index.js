@@ -278,10 +278,12 @@ function applyConfig(idnum) {
 	renderData(tempSource,"Time",tempVariable, idnum); //omit param1 first
 
 	//complete the display adjustements
-	chartObjects[idnum].options.scales.y.min = infoObjects[idnum].yAxisMinValue;
-	chartObjects[idnum].options.scales.y.max = infoObjects[idnum].yAxisMaxValue;
-	chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize;
+	if (infoObjects[idnum].yAxisMinValue != undefined) chartObjects[idnum].options.scales.y.min = infoObjects[idnum].yAxisMinValue *1;
+	if (infoObjects[idnum].yAxisMaxValue != undefined) chartObjects[idnum].options.scales.y.max = infoObjects[idnum].yAxisMaxValue *1;
+	if (infoObjects[idnum].xAxisStepSize != undefined)chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize *1;
 	chartObjects[idnum].data.datasets[0].borderColor = infoObjects[idnum].colorvalue;
+
+	chartObjects[idnum].update();
 }
 
 function setConfigVariables(idnum) {
