@@ -371,11 +371,10 @@ function handleDrop3(e) {
 		console.log("drop event fired - file " + count);
 		console.log(fileEntry[count]);
   }
-  for (count = 0; count < fileEntry.length; count++) {
-  	setTimeout(function() {
-  		handleFile(fileEntry[count], readData3, errorData, count);
-  	},1000+count*500);
-  }
+  handleFile(fileEntry[0], readData3, errorData, 0);
+  handleFile(fileEntry[1], readData3, errorData, 1);
+  handleFile(fileEntry[2], readData3, errorData, 2);
+  	
 }
 
 function handleFile(entry, successCallback, errorCallback, param) {
@@ -390,7 +389,6 @@ function handleFile(entry, successCallback, errorCallback, param) {
 			errorCallback(readerX.error);
 		}
 		readerX.readAsText(file);
-		VSimportparams.fileType = file.type;	
 	}, errorCallback);
 }
 
