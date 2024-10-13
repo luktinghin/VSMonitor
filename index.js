@@ -20,8 +20,8 @@ class ChartComponent extends HTMLElement {
 		this.innerHTML = `
 		<div class="chart-outer">
 			<div class="chart-left">
-				<div class='chart-header' id='chart-header-${num}'>
-					<div style="">Parameter ${num}</div>
+				<div class='chart-header'>
+					<div style="" id='chart-header-${num}'>Parameter ${num}</div>
 					<div style="float:right;font-size:0.75rem;text-align:right"><a class="button paramoptions" onclick="setConfig(${num})"><i style="padding-right:6px" class="fas fa-cog"></i>Options</a></div>
 				</div>
 				<div class='chart-container' id='chart-container-${num}'>
@@ -84,6 +84,7 @@ function createFrame(param) {
 	el1 = document.createElement("x-chart-component");
 	el1.id = "display" + param;
 	el.appendChild(el1);
+	setConfig(param);
 }
 
 function createChart(param, inputData) {
