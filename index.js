@@ -158,7 +158,6 @@ function renderData(sourceObject, xDataName, yDataName, idnum, param1) {
 	chartObjects[idnum].update();
 	//write to infoobject
 	infoObjects[idnum].label = yDataName;
-	infoObjects[idnum].xMin = 
 	updateInfo(idnum);
 }
 
@@ -280,7 +279,7 @@ function applyConfig(idnum) {
 	//complete the display adjustements
 	if (infoObjects[idnum].yAxisMinValue != undefined) chartObjects[idnum].options.scales.y.min = infoObjects[idnum].yAxisMinValue *1;
 	if (infoObjects[idnum].yAxisMaxValue != undefined) chartObjects[idnum].options.scales.y.max = infoObjects[idnum].yAxisMaxValue *1;
-	if (infoObjects[idnum].xAxisStepSize != undefined)chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize *1;
+	//if (infoObjects[idnum].xAxisStepSize != undefined) chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize *1;
 	chartObjects[idnum].data.datasets[0].borderColor = infoObjects[idnum].colorvalue;
 
 	chartObjects[idnum].update();
