@@ -38,7 +38,7 @@ class ChartComponent extends HTMLElement {
 
 customElements.define("x-chart-component", ChartComponent);
 
-sourceData = {};
+sourceData = new Array();
 
 chartObjects = {};
 
