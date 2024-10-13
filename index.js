@@ -36,7 +36,35 @@ class ChartComponent extends HTMLElement {
 	}
 }
 
+testObject = new Array();
+testObject[0] = {};
+testObject[0].name = "testname";
+testObject[0].variables = ["a","b","c"];
+
+class SelectComponent extends HTMLElement {
+	connectedCallback() {
+		let tempId = this.getAttribute("dataid") * 1;
+		let tempEntries = testObject[tempId][this.getAttribute("datakey")];
+		let contents = "<select>";
+		contents = contents.concat("<option value='" + tempEntries[0] + "'>" + tempEntries[0] + "</option>");
+		contents = contents.concat("</select>");
+		this.innerHTML = contents;
+	}
+
+	update() {
+		let tempId = this.getAttribute("dataid") * 1;
+		let tempEntries = sourceDataInfo[tempId][this.getAttribute("datakey")];
+		let contents = "<select>";
+		for (count = 0; count<tempEntries.length; count++) {
+			contents = contents.concat("<option value='" + tempEntries[count] + "'>" + tempEntries[count] + "</option>");	
+		}
+		contents = contents.concat("</select>");
+		this.innerHTML = contents;
+	}
+}
+
 customElements.define("x-chart-component", ChartComponent);
+customElements.define("x-select", SelectComponent);
 
 sourceData = new Array();
 
