@@ -365,14 +365,12 @@ function handleDrop3(e) {
   items = dt.items;
   document.getElementById("VSimportmessage").innerHTML = "";
   for (count = 0; count < items.length; count++) {
-  		setTimeout(function() {
-  	  	fileEntry[count] = items[count].webkitGetAsEntry();
-  			console.log(items[count]);
-  			console.log(items[count].type);
-  			console.log("drop event fired - file " + count);
-  			console.log(fileEntry[count]);
-  			handleFile(fileEntry[count], readData3, errorData, count);
-  		},count * 500);
+  	fileEntry[count] = items[count].webkitGetAsEntry();
+		console.log(items[count]);
+		console.log(items[count].type);
+		console.log("drop event fired - file " + count);
+		console.log(fileEntry[count]);
+		handleFile(fileEntry[count], readData3, errorData, count);
   }
 
 }
