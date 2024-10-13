@@ -380,6 +380,7 @@ function handleFile(entry, successCallback, errorCallback) {
 		console.log('fileEntry File Event fired');
 		readerX = new FileReader();
 		readerX.onload = function() {
+			console.log(readerX.result[0]);
 			successCallback(readerX.result);
 		}
 		readerX.onerror = function() {
@@ -389,6 +390,8 @@ function handleFile(entry, successCallback, errorCallback) {
 		VSimportparams.fileType = file.type;	
 	}, errorCallback);
 }
+
+
 
 function readData3(data) {
 	if (VSimportparams.fileType == "text/csv") {

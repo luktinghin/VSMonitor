@@ -374,7 +374,7 @@ a.button.tinybutton > i {
   position:relative;
   overflow:hidden;
   white-space:nowrap;
-  height: 320px;
+  height: 360px;
   width: 100%;
 }
 #VSmodalscreen1 {
@@ -450,6 +450,9 @@ a.button.tinybutton > i {
 #VSimportmessage {
   padding-top: 10px;
   padding-bottom: 10px;
+  font-size: 0.8rem;
+  height: 5rem;
+  overflow: scroll;
 }
 #VSimportmessage2 {
   padding-top: 10px;
