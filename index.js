@@ -209,6 +209,11 @@ function preprocessTime(inputTime,param1) {
   }
 
 function setConfig(idnum) {
+	if (infoObjects[idnum] != undefined) {
+		//load the current param info first, if exists
+		tempSource = infoObjects[idnum].sourcename;
+		tempVariable = infoObjects[idnum].label;
+	}
 	contents = `
 		<div>
 			<div style="display:flex;justify-content:space-around">
@@ -260,6 +265,10 @@ function setConfig(idnum) {
 	displayDialog("Config parameter " + idnum, contents);
 	document.getElementById("chart" + idnum + "selectname").update();
 	document.getElementById("chart" + idnum + "selectvariable").update();
+	if (tempSource != undefined) {
+		document.getElementById("chart" + idnum + "selectname").value = tempSource;
+		document.getElementById("chart" + idnum + "selectvariable").value = tempVariable;
+	}
 }
 
 function applyConfig(idnum) {
@@ -275,6 +284,10 @@ function applyConfig(idnum) {
 	infoObjects[idnum].xAxisStepSize = document.querySelector("#chart" + idnum + "xaxisstepsize").value;
 
 	renderData(tempSource,"Time",tempVariable, idnum); //omit param1 first
+
+	//save the data source variables into infoobject
+	infoObjects[idnum].sourceid = tempIndex;
+	infoObjects[idnum].sourcename = document.querySelector("#chart" + idnum + "selectname" + " select").value;
 
 	//complete the display adjustements
 	if (infoObjects[idnum].yAxisMinValue != '') chartObjects[idnum].options.scales.y.min = infoObjects[idnum].yAxisMinValue *1;
