@@ -372,15 +372,11 @@ function handleDrop3(e) {
 		console.log(fileEntry[count]);
 		
   }
-  setTimeout(function() {
-  	handleFile(fileEntry[0], readData3, errorData, 0)
-  },1000);
-  setTimeout(function() {
-  	handleFile(fileEntry[1], readData3, errorData, 1)
-  },2000);
-  setTimeout(function() {
-  	handleFile(fileEntry[2], readData3, errorData, 2)
-  },3000);
+  for (count1 = 0; count < fileEntry.length; count++) {
+  	setTimeout(function() {
+  		handleFile(fileEntry[count1], readData3, errorData, count1)
+  	},1000+(1000*count));
+  }
 }
 
 function handleFile(entry, successCallback, errorCallback, param) {
@@ -405,11 +401,13 @@ function readData3(data, param, filetype) {
 	if (filetype == "text/csv") {
 		sourceData[param] = CSVtoJSON(data);
 		tempLength = sourceData[param].length - 1;
+		fileEntryLength = fileEntry.length;
+		prefix = "(" + param + "/" + fileEntryLength + ") ";
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
 		if ((sourceData[param].length > 0) && (sourceData[param][0].Time != undefined)) {
-			document.getElementById("VSimportmessage").innerHTML += fileEntry[param].name + " - data loaded successfully: " + tempLength + " entries<br>";	
+			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param].name + " - data loaded successfully: " + tempLength + " entries<br>";	
 		} else {
-			document.getElementById("VSimportmessage").innerHTML += fileEntry[param].name + " - file read but no suitable data detected.<br>";	
+			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param].name + " - file read but no suitable data detected.<br>";	
 		}
 		sourceDataInfo.push({});
 		sourceDataInfo[param].name = fileEntry[param].name;
