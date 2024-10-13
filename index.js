@@ -380,6 +380,7 @@ function handleFile(entry, successCallback, errorCallback, param) {
 		console.log('fileEntry File Event fired');
 		readerX = new FileReader();
 		readerX.onload = function() {
+			console.log("reading file " + param);
 			successCallback(readerX.result, param);
 		}
 		readerX.onerror = function() {
