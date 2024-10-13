@@ -98,13 +98,13 @@ function createChart(param, inputData) {
 			datasets: [{
 	    		label: 'Value',
 	    		data: inputData,
-	    		borderWidth:7,
+	    		borderWidth:5,
 	    		pointRadius:0,
 	    		borderJoinStyle: 'round',
-	    		borderColor: 'rgb(231, 50, 39,1)',
-	    		backgroundColor: 'rgb(231, 50, 39,1)',
-	    		pointBorderColor: 'rgb(231, 50, 39,1)',
-	    		pointBackgroundColor: 'rgb(231, 50, 39,1)',
+	    		borderColor: 'rgb(231, 50, 39,0.8)',
+	    		backgroundColor: 'rgb(231, 50, 39,0.8)',
+	    		pointBorderColor: 'rgb(231, 50, 39,0.8)',
+	    		pointBackgroundColor: 'rgb(231, 50, 39,0.8)',
 	    		fill: false,
 	    		parsing: false
 	    	}]
@@ -242,10 +242,10 @@ function setConfig(idnum) {
 							<td>Color</td>
 							<td>
 								<select id='chart${idnum}color'>
-									<option value='rgb(231, 50, 39,1)'>Red</option>
-									<option value='rgba(21,101,192,1)'>Blue</option>
-									<option value='rgba(251,192,45,1)'>Yellow</option>
-									<option value='rgb(9, 203, 93,1)'>Green</option>
+									<option value='rgb(231, 50, 39,0.8)'>Red</option>
+									<option value='rgba(21,101,192,0.8)'>Blue</option>
+									<option value='rgba(251,192,45,0.8)'>Yellow</option>
+									<option value='rgb(9, 203, 93,0.8)'>Green</option>
 								</select>
 							</td>
 					</table>
@@ -281,6 +281,9 @@ function applyConfig(idnum) {
 	if (infoObjects[idnum].yAxisMaxValue != '') chartObjects[idnum].options.scales.y.max = infoObjects[idnum].yAxisMaxValue *1;
 	if (infoObjects[idnum].xAxisStepSize != '') chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize *1;
 	chartObjects[idnum].data.datasets[0].borderColor = infoObjects[idnum].colorvalue;
+	chartObjects[idnum].data.datasets[0].backgroundColor = infoObjects[idnum].colorvalue;
+	chartObjects[idnum].data.datasets[0].pointBorderColor = infoObjects[idnum].colorvalue;
+	chartObjects[idnum].data.datasets[0].pointBackgroundColor = infoObjects[idnum].colorvalue;
 
 	chartObjects[idnum].update();
 }
@@ -397,7 +400,7 @@ function errorData(data) {
 }
 
 commonChartOptions = {
-
+			animation: false,
 	    	maintainAspectRatio: false,
 	    	interaction: {
 
@@ -443,12 +446,13 @@ commonChartOptions = {
 	    		}
 	    	},
 	        animation: {
-	        	duration: 200
+
+	        	duration: 0
 	        },
 	        transitions: {
 	        	active: {
 	        		animation: {
-	        			duration: 200
+	        			duration: 0
 	        		}
 	        	}
 	        },
