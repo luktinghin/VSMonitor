@@ -40,6 +40,8 @@ customElements.define("x-chart-component", ChartComponent);
 
 sourceData = new Array();
 
+sourceDataInfo = new Array();
+
 chartObjects = {};
 
 infoObjects = {};
@@ -262,6 +264,13 @@ function readData3(data) {
 			document.getElementById("VSimportmessage").innerHTML = fileEntry.name + " - data loaded successfully: " + tempLength + " entries";	
 		} else {
 			document.getElementById("VSimportmessage").innerHTML = fileEntry.name + " - file read but no suitable data detected.";	
+		}
+		sourceDataInfo.push({});
+		sourceDataInfo[tempCount].name = fileEntry.name;
+		sourceDataInfo[tempCount].variables = Object.keys(sourceData[tempCount][0]);
+		tempTimeIndex = sourceDataInfo[tempCount].variables.indexOf("Time");
+		if (tempTimeIndex > -1) {
+			sourceDataInfo[tempCount].variables.splice(tempTimeIndex,1);
 		}
 	} else {
 		document.getElementById("VSimportmessage").innerHTML = "Fatal error."
