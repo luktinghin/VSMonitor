@@ -209,6 +209,8 @@ function preprocessTime(inputTime,param1) {
   }
 
 function setConfig(idnum) {
+	let tempSource;
+	let tempVariable;
 	if (infoObjects[idnum] != undefined) {
 		//load the current param info first, if exists
 		tempSource = infoObjects[idnum].sourcename;
