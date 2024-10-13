@@ -374,7 +374,7 @@ function handleDrop3(e) {
   for (count = 0; count < fileEntry.length; count++) {
   	setTimeout(function() {
   		handleFile(fileEntry[count], readData3, errorData, count);
-  	},(count+1)*500);
+  	},1000+count*500);
   }
 }
 
