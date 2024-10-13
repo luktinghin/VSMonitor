@@ -370,15 +370,7 @@ function handleDrop3(e) {
 		console.log(items[count].type);
 		console.log("drop event fired - file " + count);
 		console.log(fileEntry[count]);
-		
-  }
-  for (count1 = 0; count1 < fileEntry.length; count1++) {
-  	setTimeout(function() {
-  		console.log(1000+(1000*count1));
-  		console.log(fileEntry[count1]);
-  		handleFile(fileEntry[count1], readData3, errorData, count1);
-
-  	},1000+(1000*count1));
+		handleFile(fileEntry[count], readData3, errorData, count);
   }
 }
 
@@ -387,7 +379,7 @@ function handleFile(entry, successCallback, errorCallback, param) {
 		console.log('fileEntry File Event fired');
 		readerX = new FileReader();
 		readerX.onload = function() {
-			console.log("reading file " + param);
+			console.log("---reading file " + param);
 			filetype = file.type;
 			successCallback(readerX.result, param, filetype);
 		}
@@ -402,6 +394,7 @@ function handleFile(entry, successCallback, errorCallback, param) {
 
 function readData3(data, param, filetype) {
 	if (filetype == "text/csv") {
+		console.log("---readdata fired");
 		sourceData[param] = CSVtoJSON(data);
 		tempLength = sourceData[param].length - 1;
 		fileEntryLength = fileEntry.length;
