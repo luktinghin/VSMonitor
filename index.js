@@ -114,6 +114,7 @@ function createChart(param, inputData) {
 
 function updateInfo(idnum,param1) {
 	if (param1 == undefined) {
+		index = -1;
 		for (count = chartObjects[idnum].data.datasets[0].data.length - 1; count>0; count--) {
 			if (!isNaN(chartObjects[idnum].data.datasets[0].data[count].x) && !isNaN(chartObjects[idnum].data.datasets[0].data[count].y)) {
 				index = count;
@@ -126,7 +127,7 @@ function updateInfo(idnum,param1) {
 	if (index >= 0) {
 		console.log(index);
 		document.getElementById("chart-info-" + idnum).textContent = chartObjects[idnum].data.datasets[0].data[index].y;
-		document.getElementById("chart-desc-" + idnum).innerHTML = new Date(chartObjects[idnum].data.datasets[0].data[index].x).toLocaleString() + "<br><b>" + infoObjects[idnum].label + "</b>";
+		document.getElementById("chart-desc-" + idnum).innerHTML = new Date(chartObjects[idnum].data.datasets[0].data[index].x).toLocaleTimeString() + "<br><b>" + infoObjects[idnum].label + "</b>";
 	}
 }
 
@@ -229,6 +230,7 @@ function setConfig(idnum) {
 }
 
 function applyConfig(idnum) {
+	if (chartObjects[idnum] == undefined) createChart(idnum);
 	tempIndex = document.querySelector("#chart" + idnum + "selectname" + " select").selectedIndex;
 	tempSource = sourceData[tempIndex];
 	tempVariable = document.querySelector("#chart" + idnum + "selectvariable" + " select").value;
