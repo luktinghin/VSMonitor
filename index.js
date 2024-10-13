@@ -370,9 +370,12 @@ function handleDrop3(e) {
 		console.log(items[count].type);
 		console.log("drop event fired - file " + count);
 		console.log(fileEntry[count]);
-		handleFile(fileEntry[count], readData3, errorData, count);
   }
-
+  for (count = 0; count < fileEntry.length; count++) {
+  	setTimeout(function() {
+  		handleFile(fileEntry[count], readData3, errorData, count);
+  	},count*500);
+  }
 }
 
 function handleFile(entry, successCallback, errorCallback, param) {
