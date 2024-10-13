@@ -269,6 +269,12 @@ function setConfig(idnum) {
 		setConfigVariables(idnum);
 		document.querySelector("#chart" + idnum + "selectvariable select").value = tempVariable;
 	}
+	if (infoObjects[idnum] != undefined) {
+		if (infoObjects[idnum].colorvalue != "") document.querySelector("#chart" + idnum + "color").value = infoObjects[idnum].colorvalue;
+		if (infoObjects[idnum].yAxisMinValue != "") document.querySelector("#chart" + idnum + "ymin").value = infoObjects[idnum].yAxisMinValue;
+		if (infoObjects[idnum].yAxisMaxValue != "") document.querySelector("#chart" + idnum + "ymax").value = infoObjects[idnum].yAxisMaxValue;
+		if (infoObjects[idnum].xAxisStepSize != "") document.querySelector("#chart" + idnum + "xaxisstepsize").value = infoObjects[idnum].xAxisStepSize;
+	}
 }
 
 function applyConfig(idnum) {
