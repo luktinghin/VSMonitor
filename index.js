@@ -394,21 +394,20 @@ function handleFile(entry, successCallback, errorCallback, param) {
 
 function readData3(data, param) {
 	if (VSimportparams.fileType == "text/csv") {
-		sourceData.push(CSVtoJSON(data));
-		tempCount = sourceData.length - 1;
-		tempLength = sourceData[tempCount].length - 1;
+		sourceData[param] = CSVtoJSON(data);
+		tempLength = sourceData[param].length - 1;
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
-		if ((sourceData[tempCount].length > 0) && (sourceData[tempCount][0].Time != undefined)) {
+		if ((sourceData[param].length > 0) && (sourceData[param][0].Time != undefined)) {
 			document.getElementById("VSimportmessage").innerHTML += fileEntry[param].name + " - data loaded successfully: " + tempLength + " entries<br>";	
 		} else {
 			document.getElementById("VSimportmessage").innerHTML += fileEntry[param].name + " - file read but no suitable data detected.<br>";	
 		}
 		sourceDataInfo.push({});
-		sourceDataInfo[tempCount].name = fileEntry[param].name;
-		sourceDataInfo[tempCount].variables = Object.keys(sourceData[tempCount][0]);
+		sourceDataInfo[param].name = fileEntry[param].name;
+		sourceDataInfo[param].variables = Object.keys(sourceData[param][0]);
 		tempTimeIndex = sourceDataInfo[tempCount].variables.indexOf("Time");
 		if (tempTimeIndex > -1) {
-			sourceDataInfo[tempCount].variables.splice(tempTimeIndex,1);
+			sourceDataInfo[param].variables.splice(tempTimeIndex,1);
 		}
 	} else {
 		document.getElementById("VSimportmessage").innerHTML = "Fatal error: unrecognized file."
