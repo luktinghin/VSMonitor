@@ -238,6 +238,8 @@ function applyConfig(idnum) {
 }
 
 function setConfigVariables(idnum) {
+	tempDataId = document.querySelector("#chart" + idnum + "selectname" + " select").selectedIndex;
+	document.getElementById("chart" + idnum + "selectvariable").setAttribute("dataid", tempDataId);
 	document.getElementById("chart" + idnum + "selectvariable").update();
 }
 

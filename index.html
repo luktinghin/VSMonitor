@@ -21,7 +21,8 @@
 		<!--<x-chart-component id="display1"></x-chart-component>-->
 	</div>
 	<div id="card_actions">
-		<button onclick="createFrame();createFrame();createFrame();">Create 3 frames</button>
+		<button onclick="setmodal('modalVSimport');">Load CSV</button>
+		<button onclick="createFrame();">Create frame</button>
 		<button onclick="customFunction(AS3Data,'Time','ECG_HR',1)">Feed ECG_HR data from AS3Data into Frame 1</button>
 		<button onclick="customFunction(BISData,'Time','BIS',2)">Feed BIS data from BISData into Frame 2</button>
 		<button onclick="customFunction(MPData,'Time','NOM_PLETH_PULS_RATE',3,'MMDDYYYY')">Feed NOM_PLETH_PULS_RATE from MPData into Frame 3</button>
