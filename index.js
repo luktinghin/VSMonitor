@@ -372,10 +372,12 @@ function handleDrop3(e) {
 		console.log(fileEntry[count]);
 		
   }
-  for (count1 = 0; count < fileEntry.length; count++) {
+  for (count1 = 0; count1 < fileEntry.length; count1++) {
   	setTimeout(function() {
-  		handleFile(fileEntry[count1], readData3, errorData, count1)
-  	},1000+(1000*count));
+  		handleFile(fileEntry[count1], readData3, errorData, count1);
+  		console.log(1000+(1000*count1));
+  		console.log(fileEntry[count1]);
+  	},1000+(1000*count1));
   }
 }
 
@@ -402,7 +404,8 @@ function readData3(data, param, filetype) {
 		sourceData[param] = CSVtoJSON(data);
 		tempLength = sourceData[param].length - 1;
 		fileEntryLength = fileEntry.length;
-		prefix = "(" + param + "/" + fileEntryLength + ") ";
+		param1 = param + 1;
+		prefix = "(" + param1 + "/" + fileEntryLength + ") ";
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
 		if ((sourceData[param].length > 0) && (sourceData[param][0].Time != undefined)) {
 			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param].name + " - data loaded successfully: " + tempLength + " entries<br>";	
