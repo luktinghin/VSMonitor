@@ -36,18 +36,10 @@ class ChartComponent extends HTMLElement {
 	}
 }
 
-testObject = new Array();
-testObject[0] = {};
-testObject[0].name = "testname";
-testObject[0].variables = ["a","b","c"];
-
 class SelectComponent extends HTMLElement {
 	connectedCallback() {
-		let tempId = this.getAttribute("dataid") * 1;
-		let idnum = this.getAttribute("idnum");
-		let tempEntries = testObject[tempId][this.getAttribute("datakey")];
-		let contents = "<select id='chart" + idnum + "select" + this.getAttribute("datakey") + "''>";
-		contents = contents.concat("<option value='" + tempEntries[0] + "'>" + tempEntries[0] + "</option>");
+		let contents = "<select>";
+		contents = contents.concat("<option value=''></option>");
 		contents = contents.concat("</select>");
 		this.innerHTML = contents;
 	}
@@ -63,7 +55,7 @@ class SelectComponent extends HTMLElement {
 		} else if (this.getAttribute("datakey") == "variables") {
 			let tempEntries = sourceDataInfo[tempId].variables;	
 		}
-		let contents = "<select id='chart" + idnum + "select" + this.getAttribute("datakey") + "''>";
+		let contents = "<select>";
 		for (let count = 0; count<tempEntries.length; count++) {
 			contents = contents.concat("<option value='" + tempEntries[count] + "'>" + tempEntries[count] + "</option>");	
 		}
@@ -218,11 +210,11 @@ function setConfig(idnum) {
 			<table>
 				<tr>
 					<td>Data source</td>
-					<td><x-select idnum="${idnum}" datakey="name" dataid="0"></x-select></td>
+					<td><x-select id="chart${idnum}selectname" idnum="${idnum}" datakey="name" dataid="0"></x-select></td>
 				</tr>
 				<tr>
 					<td>Variable</td>
-					<td><x-select idnum="${idnum}" datakey="variables" dataid="0"></x-select></td>
+					<td><x-select idnum="chart${idnum}selectvariable" datakey="variables" dataid="0"></x-select></td>
 				</tr>
 			</table>
 			<div>
@@ -233,7 +225,7 @@ function setConfig(idnum) {
 	`;
 	displayDialog("Config parameter " + idnum, contents);
 	document.getElementById("chart" + idnum + "selectname").update();
-	document.getElementById("chart" + idnum + "selectvariables").update();
+	document.getElementById("chart" + idnum + "selectvariable").update();
 }
 
 function displayDialog(dialogTitle, dialogContent) {
