@@ -47,13 +47,13 @@ class SelectComponent extends HTMLElement {
 	update() {
 		let tempId = this.getAttribute("dataid") * 1;
 		let idnum = this.getAttribute("idnum");
+		let tempEntries = new Array();
 		if (this.getAttribute("datakey") == "name") {
-			let tempEntries = new Array();
 			for (let countA = 0; countA < sourceDataInfo.length; countA++) {
 				tempEntries.push(sourceDataInfo[countA].name);
 			}
 		} else if (this.getAttribute("datakey") == "variables") {
-			let tempEntries = sourceDataInfo[tempId].variables;	
+			tempEntries = sourceDataInfo[tempId].variables;	
 		}
 		let contents = "<select>";
 		for (let count = 0; count<tempEntries.length; count++) {
