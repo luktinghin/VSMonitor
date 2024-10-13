@@ -388,8 +388,8 @@ commonChartOptions = {
 	    				color: "rgba(255,255,255,0.6)"
 	    			},
 					title: {
-						display: true,
-						text:'Time (minutes)'
+						display: false,
+						text:'Time'
 					}
 	    		}
 	    	},
