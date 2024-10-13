@@ -210,21 +210,32 @@ function setConfig(idnum) {
 			<table>
 				<tr>
 					<td>Data source</td>
-					<td><x-select id="chart${idnum}selectname" idnum="${idnum}" datakey="name" dataid="0"></x-select></td>
+					<td><x-select id="chart${idnum}selectname" idnum="${idnum}" datakey="name" dataid="0" onchange="setConfigVariables(${idnum});"></x-select></td>
 				</tr>
 				<tr>
 					<td>Variable</td>
-					<td><x-select idnum="chart${idnum}selectvariable" datakey="variables" dataid="0"></x-select></td>
+					<td><x-select id="chart${idnum}selectvariable" idnum="${idnum}" datakey="variables" dataid="0"></x-select></td>
 				</tr>
 			</table>
 			<div>
-				<a class="button">Proceed</a>
-				<a class="button">Cancel</a>
+				<a class="button" onclick="applyConfig(${idnum});hidemodal('modalDialog')"">Proceed</a>
+				<a class="button" onclick="hidemodal('modalDialog')">Cancel</a>
 			</div>
 		</div>
 	`;
 	displayDialog("Config parameter " + idnum, contents);
 	document.getElementById("chart" + idnum + "selectname").update();
+	document.getElementById("chart" + idnum + "selectvariable").update();
+}
+
+function applyConfig(idnum) {
+	tempIndex1 = document.querySelector("#chart" + idnum + "selectname" + " select").selectedIndex;
+	tempSource = sourceData(tempIndex);
+	tempVariable = document.querySelector("#chart" + idnum + "selectvariable" + " select").value;
+	renderData(tempSource,"Time",tempVariable, idnum); //omit param1 first
+}
+
+function setConfigVariables(idnum) {
 	document.getElementById("chart" + idnum + "selectvariable").update();
 }
 
