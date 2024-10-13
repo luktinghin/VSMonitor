@@ -365,12 +365,16 @@ function handleDrop3(e) {
   dt = e.dataTransfer;
   fileList = dt.files;
   items = dt.items;
-  fileEntry = items[0].webkitGetAsEntry();
-  console.log(items[0]);
-  console.log(items[0].type);
-  console.log("drop event fired");
-  console.log(fileEntry);
-  handleFile(fileEntry, readData3, errorData);
+  document.getElementById("VSimportmessage").innerHTML = "";
+  for (count = 0; count < items.length; count++) {
+  	  fileEntry = items[count].webkitGetAsEntry();
+  		console.log(items[count]);
+  		console.log(items[count].type);
+  		console.log("drop event fired - file " + count);
+  		console.log(fileEntry);
+  		handleFile(fileEntry, readData3, errorData);
+  }
+
 }
 
 function handleFile(entry, successCallback, errorCallback) {
@@ -395,9 +399,9 @@ function readData3(data) {
 		tempLength = sourceData[tempCount].length - 1;
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
 		if ((sourceData[tempCount].length > 0) && (sourceData[tempCount][0].Time != undefined)) {
-			document.getElementById("VSimportmessage").innerHTML = fileEntry.name + " - data loaded successfully: " + tempLength + " entries";	
+			document.getElementById("VSimportmessage").innerHTML += fileEntry.name + " - data loaded successfully: " + tempLength + " entries<br>";	
 		} else {
-			document.getElementById("VSimportmessage").innerHTML = fileEntry.name + " - file read but no suitable data detected.";	
+			document.getElementById("VSimportmessage").innerHTML += fileEntry.name + " - file read but no suitable data detected.<br>";	
 		}
 		sourceDataInfo.push({});
 		sourceDataInfo[tempCount].name = fileEntry.name;
