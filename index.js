@@ -370,11 +370,8 @@ function handleDrop3(e) {
 		console.log(items[count].type);
 		console.log("drop event fired - file " + count);
 		console.log(fileEntry[count]);
+		handleFile(fileEntry[count], readData3, errorData, count);
   }
-  handleFile(fileEntry[0], readData3, errorData, 0);
-  handleFile(fileEntry[1], readData3, errorData, 1);
-  handleFile(fileEntry[2], readData3, errorData, 2);
-  	
 }
 
 function handleFile(entry, successCallback, errorCallback, param) {
@@ -383,7 +380,8 @@ function handleFile(entry, successCallback, errorCallback, param) {
 		readerX = new FileReader();
 		readerX.onload = function() {
 			console.log("reading file " + param);
-			successCallback(readerX.result, param);
+			filetype = file.type;
+			successCallback(readerX.result, param, filetype);
 		}
 		readerX.onerror = function() {
 			errorCallback(readerX.error);
@@ -394,8 +392,8 @@ function handleFile(entry, successCallback, errorCallback, param) {
 
 
 
-function readData3(data, param) {
-	if (VSimportparams.fileType == "text/csv") {
+function readData3(data, param, filetype) {
+	if (filetype == "text/csv") {
 		sourceData[param] = CSVtoJSON(data);
 		tempLength = sourceData[param].length - 1;
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
