@@ -397,12 +397,12 @@ function readData3(data) {
 		tempLength = sourceData[tempCount].length - 1;
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
 		if ((sourceData[tempCount].length > 0) && (sourceData[tempCount][0].Time != undefined)) {
-			document.getElementById("VSimportmessage").innerHTML += fileEntry[fileEntry.length-1].name + " - data loaded successfully: " + tempLength + " entries<br>";	
+			document.getElementById("VSimportmessage").innerHTML += fileEntry[tempCount].name + " - data loaded successfully: " + tempLength + " entries<br>";	
 		} else {
-			document.getElementById("VSimportmessage").innerHTML += fileEntry[fileEntry.length-1].name + " - file read but no suitable data detected.<br>";	
+			document.getElementById("VSimportmessage").innerHTML += fileEntry[tempCount].name + " - file read but no suitable data detected.<br>";	
 		}
 		sourceDataInfo.push({});
-		sourceDataInfo[tempCount].name = fileEntry.name;
+		sourceDataInfo[tempCount].name = fileEntry[tempCount].name;
 		sourceDataInfo[tempCount].variables = Object.keys(sourceData[tempCount][0]);
 		tempTimeIndex = sourceDataInfo[tempCount].variables.indexOf("Time");
 		if (tempTimeIndex > -1) {
