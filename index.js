@@ -380,7 +380,7 @@ function handleDrop3(e) {
   },2000);
   setTimeout(function() {
   	handleFile(fileEntry[2], readData3, errorData, 2)
-  },2000);
+  },3000);
 }
 
 function handleFile(entry, successCallback, errorCallback, param) {
