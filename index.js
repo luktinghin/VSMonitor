@@ -125,7 +125,6 @@ function updateInfo(idnum,param1) {
 		index = param1;
 	}
 	if (index >= 0) {
-		console.log(index);
 		document.getElementById("chart-info-" + idnum).textContent = chartObjects[idnum].data.datasets[0].data[index].y;
 		document.getElementById("chart-desc-" + idnum).innerHTML = new Date(chartObjects[idnum].data.datasets[0].data[index].x).toLocaleTimeString() + "<br><b>" + infoObjects[idnum].label + "</b>";
 	}
@@ -284,7 +283,20 @@ function applyConfig(idnum) {
 	infoObjects[idnum].yAxisMaxValue = document.querySelector("#chart" + idnum + "ymax").value;
 	infoObjects[idnum].xAxisStepSize = document.querySelector("#chart" + idnum + "xaxisstepsize").value;
 
-	renderData(tempSource,"Time",tempVariable, idnum); //omit param1 first
+	//compare old vs new and see if need to update
+	different = false;
+	if (tempIndex != infoObjects[idnum].sourceid) {
+		different = true;
+	} else {
+		if (tempVariable != infoObjects[idnum].label) {
+			different = true;
+		} else {
+			if (sourceData[tempIndex].length != chartObjects[idnum].data.datasets[0].length) {
+				different = true;
+			}
+		}
+	}
+	if (different) renderData(tempSource,"Time",tempVariable, idnum); //omit param1 first
 
 	//save the data source variables into infoobject
 	infoObjects[idnum].sourceid = tempIndex;
