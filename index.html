@@ -15,10 +15,7 @@
     <title>VSdisplay - VSCapture Data Visualization Tool</title>
 </head>
 <body>
-	<script src="index.js"></script>
-	<script src="chart.min.js"></script>
-	<script src="chartjs-plugin-crosshair.min.js"></script>
-	<script type="module" src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
 
 	<div id="main-body">
 		<!--<x-chart-component id="display1"></x-chart-component>-->
@@ -29,5 +26,49 @@
 		<button onclick="customFunction(BISData,'Time','BIS',2)">Feed BIS data from BISData into Frame 2</button>
 		<button onclick="customFunction(MPData,'Time','NOM_PLETH_PULS_RATE',3,'MMDDYYYY')">Feed NOM_PLETH_PULS_RATE from MPData into Frame 3</button>
 	</div>
+
+	<!--modals-->
+		<div id="modalDialog" class="modal alt">
+			<div class="modal-content alt" id="modalDialogcontent">
+				<div class="modal-header alt"><span class="title">VSdisplay</span><span class="close alt" onClick="hidemodal('modalDialog')">&times;</span></div>
+				<div class="modal-body alt">VSdisplay is loading up...</div>
+			</div>
+		</div>
+		<div id="modalVSimport" class="modal">
+			<div class="modal-content" id="modalVSimportcontent">
+				<div class="modal-header">Load Vital Signs Capture File</div>
+				<div class="modal-body">
+					<div id="VSmodalscreencontainer">
+						<div id="VSmodalscreen1">
+							<div>Load the CSV file here:</div>
+							<div id="VSdropArea">
+								<div style="font-size:400%" class="VSicon"><i class="fas fa-cloud-download-alt"></i></div>
+								<div style="width:80%">Drag and drop the .CSV file from VSCapture here to begin data transfer.</div>
+							</div>
+							<div id="VSimportmessage">&nbsp;</div>
+						</div><!-- end screen1-->
+						<!--
+						<div id="VSmodalscreen2">
+							<div>Load the infusion data JSON file here:</div>
+							<div id="VSdropArea2">
+								<div style="font-size:400%" class="VSicon"><i class="fas fa-cloud-download-alt"></i></div>
+								<div style="width:80%">Drag and drop the .json file from VSCapture here to begin real-time data transfer.</div>
+							</div>
+							<div id="VSimportmessage2">&nbsp;</div>
+						</div>-->
+					</div>
+					<div id="VSimportbuttons">
+						<a class="button invert disabled" id="VSimportconfirmbtn" onclick="hidemodal('modalVSimport');">Confirm</a>
+						<!--<a class="button" id="VSloadinfusionbtn" onclick="VSimporttogglescreen(2)">Load Infusion Data</a>-->
+						<a class="button alt right" onclick="hidemodal('modalVSimport');">Cancel</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<script src="index.js"></script>
+	<script src="chart.min.js"></script>
+	<script src="chartjs-plugin-crosshair.min.js"></script>
+	<script type="module" src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 </body>
 </html>

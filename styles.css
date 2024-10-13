@@ -153,3 +153,291 @@ button, select, input {
 .chart-container {
   height: 300px;
 }
+
+/*modal css*/
+.modal {
+    display: block; 
+    position: fixed; 
+    z-index:98;
+    padding-top: 15vh; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    opacity:0;
+    transition: opacity 0.3s ease-in-out;
+    will-change:opacity;
+    pointer-events:none;
+}
+
+
+.modal.fadein {
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fcfcfc;
+    margin: auto;
+    padding: 0;
+    font-size: 0.9rem;
+  border-radius: 15px;
+  border: 1px solid #fff;
+      
+    width: 85%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),0 6px 20px 0 rgba(0,0,0,0.19), inset 0px -4px 0px 0 rgba(0,0,0,0.15);
+    -webkit-transform: translateY(-150%);
+    transform: translateY(-150%);
+    transition: transform 300ms ease-in-out;
+    will-change:transform;
+    overscroll-behavior: contain;
+    /*-webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;*/
+}
+
+.modal-content.open {
+  -webkit-transform: none;
+      transform: none;
+  transition: transform 300ms ease-in-out;
+}
+
+.close {
+    color:grey;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+.close:hover,
+.close:focus {
+    color:#4CAF50;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 15px 16px 2px 12px;
+    border-radius: 15px 15px 0px 0px;
+    box-shadow:0px 6px 8px -5px rgb(0 0 0 / 15%);
+    
+    /*background-color: #5cb85c;*/
+    background-color: #4caf50;
+    color:grey;
+    background:#fefefe;
+    font-size:120%;
+    line-height:30px;
+    font-weight:bold;
+}
+
+.modal-body {
+  padding:12px;
+  padding-bottom:20px;
+  overflow-y:auto; 
+  max-height: 70dvh;
+}
+
+/*buttons */
+a.button {
+  border-radius:2em;
+  min-width:100px;
+  text-align:center;
+  border:1px solid #4CAF50;
+  display:inline-block;
+  transition: all 0.2s ease;
+  color:#4CAF50;
+  background-color:white;
+  text-decoration:none;
+  font-weight:bold;
+  padding:5px;
+  margin-right:5px;
+  outline:0;
+  cursor:pointer;
+}
+a.button.invert {
+  background:#4CAF50;
+  color:white;
+}
+a.button.custom {
+  min-width:50px;
+}
+a.button.wide {
+  min-width:45%;
+}
+a.button.huge {
+  width:90%;
+  font-size:130%;
+  color:#555;
+  background:#eee;
+  padding-left:10px;
+  border-radius:6px;
+  text-align:left;
+  border:2px solid #ccc;
+  margin:0.7rem 0rem 0.7rem 0rem;
+}
+a.button.huge > i {
+  float:right;
+  padding-right:5px;
+  font-size: 28px;
+}
+a.button.huge:hover, a.button.huge:active {
+  color:#eee;
+  background:#555;
+  border-color:#555;
+}
+a.button.disabled {
+  border-color:rgb(220,220,220);
+  color:rgb(190,190,190);
+  background-color:rgb(240,240,240);
+}
+a.button.bolus {
+  padding:2px;
+  background: linear-gradient(0deg, rgba(255,255,255,1) 55%, rgba(90,90,90,1) 55%, rgba(240,240,240,1) 56%);
+  min-width: 85px;
+}
+a.button:hover, a.button:active {
+  background:#4CAF50;
+  color:white;
+}
+a.button.muted {
+  /*border-color:rgb(155, 201, 157);
+  color:rgb(155, 201, 157);*/
+  border-color: rgba(128,128,128,0.5);
+  color: rgba(128,128,128,0.8);
+  min-width: 0px;
+  padding-left: 15px; padding-right: 15px;
+}
+
+.right {
+  float:right;
+}
+a.button.invert:hover, a.button.invert:active {
+  color:#4CAF50;
+  background-color:white;
+}
+a.button.muted:hover, a.button.muted:active {
+  /*border-color:#4CAF50;*/
+  /*background-color:rgb(155, 201, 157);*/
+  background-color: rgba(128,128,128,0.5);
+  color:white;
+}
+a.button.disabled:hover, a.button.disabled:active {
+  border-color:rgb(220,220,220);
+  color:rgb(190,190,190);
+  background-color:rgb(240,240,240);
+  cursor:not-allowed;
+  pointer-events: none;
+}
+
+a.button.tinybutton {
+  color: rgba(128,128,128,1);
+  border-color: rgba(128,128,128,0.15);
+  font-size: 90%;
+  padding: 2px 15px 2px 15px;
+  min-width: 80%;
+  margin-right: 0;
+  margin-bottom: 6px;
+}
+a.button.tinybutton:hover, a.button.tinybutton:active {
+  background-color: rgba(128,128,128,0.15);
+  border-color: rgba(128,128,128,0.5);
+}
+a.button.tinybutton > i {
+  padding-right: 3px;
+}
+
+/*VSimportdialog code */
+#VSmodalscreencontainer {
+  position:relative;
+  overflow:hidden;
+  white-space:nowrap;
+  height: 320px;
+  width: 100%;
+}
+#VSmodalscreen1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  transofrm: translate(0);
+  opacity: 1;
+  transition: 0.3s ease-in-out all;
+}
+#VSmodalscreen1.hide {
+  transform: translateX(-105%);
+  opacity: 0; 
+}
+#VSmodalscreen2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translateX(105%);
+  opacity: 0;
+  transition: 0.3s ease-in-out all;
+}
+#VSmodalscreen2.open {
+  transform: translate(0);
+  opacity: 1;
+}
+#VSdropArea {
+  height: 250px;
+  width: 100%;
+  background: #ddd;
+  border-radius: 9px;
+  border: 5px solid transparent;
+  transition: 0.3s ease all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  white-space: normal;
+}
+#VSdropArea2 {
+  height: 250px;
+  width: 100%;
+  background: #ddd;
+  border-radius: 9px;
+  border: 5px solid transparent;
+  transition: 0.3s ease all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  white-space: normal;
+}
+.VSicon {
+  opacity: 0.5;
+}
+#VSdropArea.VShighlight {
+  background: #eee;
+  border-color: #ccc;
+}
+#VSdropArea.VShighlight .VSicon {
+  color: #198964;
+  opacity: 1;
+}
+#VSdropArea2.VShighlight {
+  background: #eee;
+  border-color: #ccc;
+}
+#VSdropArea2.VShighlight .VSicon {
+  color: #198964;
+  opacity: 1;
+}
+#VSimportmessage {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#VSimportmessage2 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
