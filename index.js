@@ -374,19 +374,21 @@ function handleDrop3(e) {
   }
 }
 
+readerX = new Array();
+
 function handleFile(entry, successCallback, errorCallback, param) {
 	entry.file(function (file) {
 		console.log('fileEntry File Event fired');
-		readerX = new FileReader();
-		readerX.onload = function() {
+		readerX[param] = new FileReader();
+		readerX[param].onload = function() {
 			console.log("---reading file " + param);
 			filetype = file.type;
-			successCallback(readerX.result, param, filetype);
+			successCallback(readerX[param].result, param, filetype);
 		}
 		readerX.onerror = function() {
-			errorCallback(readerX.error);
+			errorCallback(readerX[param].error);
 		}
-		readerX.readAsText(file);
+		readerX[param].readAsText(file);
 	}, errorCallback);
 }
 
