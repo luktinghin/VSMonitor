@@ -213,11 +213,10 @@ function preprocessTime(inputTime,param1) {
 
 function removeFrame() {
 	customselect = "<select id='selectdelete' onchange='updatedelete(this.value)'>";
-	for (i = 0; i<infoObjects.length; i++) {
+	for (i = 1; i<infoObjects.length; i++) {
 		if (infoObjects[i] != undefined) {
 			if (infoObjects[i] != {}) {
-				count = i+1;
-				customselect += "<option value='" + count + "'>" + count + "</option>";
+				customselect += "<option value='" + i + "'>" + i + "</option>";
 			}
 		}
 	};
@@ -238,7 +237,7 @@ function removeFrame() {
 		</div>
 		<div class="configbuttons">
 			<a class="button invert" onclick="removeChart(document.getElementById('selectdelete').value*1)">DELETE</a>
-			<a class="button">Cancel</a>
+			<a class="button muted">Cancel</a>
 		</div>
 	`;
 	displayDialog("Delete row",text);
@@ -311,7 +310,7 @@ function setConfig(idnum) {
 			</div>
 			<div class='configbuttons'>
 				<a class="button invert" onclick="applyConfig(${idnum});hidemodal('modalDialog')"">Proceed</a>
-				<a class="button" onclick="hidemodal('modalDialog')">Cancel</a>
+				<a class="button muted" onclick="hidemodal('modalDialog')">Cancel</a>
 			</div>
 		</div>
 	`;
