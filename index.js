@@ -212,11 +212,11 @@ function preprocessTime(inputTime,param1) {
   }
 
 function removeFrame() {
-	customselect = "<select id='selectdelete' onchange='updatedelete(this.value)'>";
+	customselect = "<select id='selectdelete'>";
 	for (i = 1; i<infoObjects.length; i++) {
 		if (infoObjects[i] != undefined) {
-			if (infoObjects[i] != {}) {
-				customselect += "<option value='" + i + "'>" + i + "</option>";
+			if (infoObjects[i].label != undefined) {
+				customselect += "<option value='" + i + "'>" + infoObjects[i].label + "</option>";
 			}
 		}
 	};
@@ -226,22 +226,17 @@ function removeFrame() {
 			<div class="tableheading">Select row to remove</div>
 				<table style='width:100%'>
 					<tr class="fr">
-						<td>Row number</td>
+						<td>Row</td>
 						<td>${customselect}</td>
-					</tr>
-					<tr>
-						<td>Row name</td>
-						<td><span id="rowname"></span</td>
 					</tr>
 				</table>
 		</div>
 		<div class="configbuttons">
-			<a class="button invert" onclick="removeChart(document.getElementById('selectdelete').value*1)">DELETE</a>
-			<a class="button muted">Cancel</a>
+			<a class="button invert" onclick="removeChart(document.getElementById('selectdelete').value*1);hidemodal('modalDialog')">DELETE</a>
+			<a class="button muted" onclick="hidemodal('modalDialog')">Cancel</a>
 		</div>
 	`;
 	displayDialog("Delete row",text);
-	updatedelete(document.getElementById('selectdelete').value*1);
 }
 
 function updatedelete(idnum) {
