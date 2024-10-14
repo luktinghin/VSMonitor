@@ -20,7 +20,7 @@ class ChartComponent extends HTMLElement {
 			<div class="chart-left">
 				<div class='chart-header'>
 					<div style="" id='chart-header-${num}'>Parameter ${num}</div>
-					<div style="float:right;font-size:0.75rem;text-align:right"><a class="button actionbtn" onclick="reload(${num}"><i class="fas fa-sync-alt" style="padding-right:6px"></i>Refresh</a>&nbsp;&nbsp;<a class="button actionbtn" onclick="setConfig(${num})"><i style="padding-right:6px" class="fas fa-cog"></i>Options</a></div>
+					<div style="float:right;font-size:0.75rem;text-align:right"><a class="button actionbtn" onclick="reload(${num})"><i class="fas fa-sync-alt" style="padding-right:6px"></i>Refresh</a>&nbsp;&nbsp;<a class="button actionbtn" onclick="setConfig(${num})"><i style="padding-right:6px" class="fas fa-cog"></i>Options</a></div>
 				</div>
 				<div class='chart-container' id='chart-container-${num}'>
 					<canvas id="chart${num}">
