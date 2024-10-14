@@ -162,6 +162,7 @@ function renderData(sourceObject, xDataName, yDataName, idnum, param1) {
 	//write to infoobject
 	infoObjects[idnum].label = yDataName;
 	updateInfo(idnum);
+	applyDisplayChanges(idnum);
 }
 
 
@@ -359,15 +360,31 @@ function applyConfig(idnum) {
 	infoObjects[idnum].sourceid = tempIndex;
 	infoObjects[idnum].sourcename = document.querySelector("#chart" + idnum + "selectname" + " select").value;
 
+	applyDisplayChanges(idnum);
+}
+
+function applyDisplayChanges(idnum) {
 	//complete the display adjustements
-	if (infoObjects[idnum].yAxisMinValue != '') chartObjects[idnum].options.scales.y.min = infoObjects[idnum].yAxisMinValue *1;
-	if (infoObjects[idnum].yAxisMaxValue != '') chartObjects[idnum].options.scales.y.max = infoObjects[idnum].yAxisMaxValue *1;
-	if (infoObjects[idnum].xAxisStepSize != '') chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize *1;
+	if (infoObjects[idnum].yAxisMinValue != '') {
+		chartObjects[idnum].options.scales.y.min = infoObjects[idnum].yAxisMinValue *1;
+	} else {
+		chartObjects[idnum].options.scales.y.min = undefined;
+	}
+	if (infoObjects[idnum].yAxisMaxValue != '') {
+		chartObjects[idnum].options.scales.y.max = infoObjects[idnum].yAxisMaxValue *1;
+	} else {
+		chartObjects[idnum].options.scales.y.max = undefined;	
+	}
+	if (infoObjects[idnum].xAxisStepSize != '') {
+		chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize *1;
+	} else {
+		chartObjects[idnum].options.scales.x.time.stepSize = undefined;
+	}
 	chartObjects[idnum].data.datasets[0].borderColor = infoObjects[idnum].colorvalue;
 	chartObjects[idnum].data.datasets[0].backgroundColor = infoObjects[idnum].colorvalue;
 	chartObjects[idnum].data.datasets[0].pointBorderColor = infoObjects[idnum].colorvalue;
 	chartObjects[idnum].data.datasets[0].pointBackgroundColor = infoObjects[idnum].colorvalue;
-
+	chartObjects[idnum].options.scales.y.title.text = infoObjects[idnum].label;
 	chartObjects[idnum].update();
 }
 
@@ -501,6 +518,16 @@ function readData3(data, param_sourceid, filetype, param_reload, param_reload_ch
 function reload(idnum) {
 	tempSourceID = infoObjects[idnum].sourceid;
 	handleFile(fileEntry[tempSourceID],readData3,errorData,tempSourceID,true,idnum);
+}
+
+function reloadAll() {
+	for (i=0; i<infoObjects.length; i++) {
+		if (infoObjects[i] != undefined) {
+			if (infoObjects[i].label != undefined) {
+				reload(i);
+			}
+		}
+	}
 }
 
 function errorData(data) {
