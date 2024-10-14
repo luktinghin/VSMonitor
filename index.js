@@ -27,8 +27,8 @@ class ChartComponent extends HTMLElement {
 				</div>
 			</div>
 			<div class="chart-right">
-				<div class="chart-right-upper" id="chart-info-${num}">31</div>
-				<div class="chart-right-lower" id="chart-desc-${num}">Lorem ipsum</div>
+				<div class="chart-right-upper" id="chart-info-${num}">-</div>
+				<div class="chart-right-lower" id="chart-desc-${num}">Value</div>
 			</div>
 		</div>
 		`;
@@ -217,8 +217,9 @@ function setConfig(idnum) {
 		<div>
 			<div style="display:flex;justify-content:space-around">
 				<div>
+					<div class='tableheading'>Source settings</div>
 					<table>
-						<tr>
+						<tr class='fr'>
 							<td>Data source</td>
 							<td><x-select id="chart${idnum}selectname" idnum="${idnum}" datakey="name" dataid="0" onchange="setConfigVariables(${idnum});"></x-select></td>
 						</tr>
@@ -230,7 +231,8 @@ function setConfig(idnum) {
 				</div>
 				<div>
 					<table>
-						<tr>
+						<div class='tableheading'>Graph settings</div>
+						<tr class='fr'>
 							<td>yAxis Min</td>
 							<td><input type='number' id="chart${idnum}ymin"></td>
 						</tr>
@@ -255,8 +257,8 @@ function setConfig(idnum) {
 					</table>
 				</div>
 			</div>
-			<div>
-				<a class="button" onclick="applyConfig(${idnum});hidemodal('modalDialog')"">Proceed</a>
+			<div class='configbuttons'>
+				<a class="button invert" onclick="applyConfig(${idnum});hidemodal('modalDialog')"">Proceed</a>
 				<a class="button" onclick="hidemodal('modalDialog')">Cancel</a>
 			</div>
 		</div>

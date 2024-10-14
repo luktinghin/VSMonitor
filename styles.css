@@ -54,7 +54,7 @@ html {
 }
 
 body {
-  font-family:  "SourceSans", "Calibri", "Trebuchet MS", "Lucida Sans", sans-serif;
+  font-family:  "SourceSans", "Avenir", "Calibri", "Trebuchet MS", "Lucida Sans", sans-serif;
   font-size: 16px; 
   margin: 0px;
   background:#303030;
@@ -103,8 +103,28 @@ body{
 /* end of pinch zoom pull to refresh block */
 
 button, select, input {
-  font-family:  "SourceSans", "Calibri", "Trebuchet MS", "Lucida Sans", sans-serif;
+  font-family:  "SourceSans", "Avenir", "Calibri", "Trebuchet MS", "Lucida Sans", sans-serif;
 }
+
+.tableheading {
+  font-family: "Brandon Text", "Avenir", "SourceSans", "Calibri", "Trebuchet MS", "Lucida Sans", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: bold;
+  opacity: 0.9;
+  color: #198964;
+  padding-bottom: 8px;
+  padding-top: 40px;
+}
+
+.configbuttons {
+  margin-top: 40px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+}
+
 #main-body {
   padding: 10px;
 }
@@ -221,7 +241,7 @@ button, select, input {
 
 .close:hover,
 .close:focus {
-    color:#4CAF50;
+    color:#198964;
     text-decoration: none;
     cursor: pointer;
 }
@@ -232,7 +252,7 @@ button, select, input {
     box-shadow:0px 6px 8px -5px rgb(0 0 0 / 15%);
     
     /*background-color: #5cb85c;*/
-    background-color: #4caf50;
+    background-color: #198964;
     color:grey;
     background:#fefefe;
     font-size:120%;
@@ -263,6 +283,10 @@ h1 {
   color: white;
   font-size: 3rem;
   font-weight: bold;
+  font-family: "Brandon Text", "Avenir", "SourceSans", "Calibri", "Trebuchet MS", "Lucida Sans", sans-serif;
+  border-bottom: 10px solid transparent;
+  border-image: linear-gradient(90deg, #198964 , transparent);
+  border-image-slice: 1;
 }
 
 h2 {
@@ -284,10 +308,10 @@ a.button {
   border-radius:2em;
   min-width:100px;
   text-align:center;
-  border:1px solid #4CAF50;
+  border:1px solid #198964;
   display:inline-block;
   transition: all 0.2s ease;
-  color:#4CAF50;
+  color:#198964;
   background-color:white;
   text-decoration:none;
   font-weight:bold;
@@ -297,7 +321,7 @@ a.button {
   cursor:pointer;
 }
 a.button.invert {
-  background:#4CAF50;
+  background:#198964;
   color:white;
 }
 a.button.custom {
@@ -338,7 +362,7 @@ a.button.bolus {
   min-width: 85px;
 }
 a.button:hover, a.button:active {
-  background:#4CAF50;
+  background:#198964;
   color:white;
 }
 a.button.muted {
@@ -354,7 +378,7 @@ a.button.muted {
   float:right;
 }
 a.button.invert:hover, a.button.invert:active {
-  color:#4CAF50;
+  color:#198964;
   background-color:white;
 }
 a.button.muted:hover, a.button.muted:active {
@@ -409,6 +433,57 @@ a.button.tinybutton > i {
   width: 100%;
   padding: 10px 15%;
   justify-content: space-between;
+}
+
+table {
+border-collapse:separate;
+border-spacing:0;
+}
+
+tr {border-left: 0; border-right: 0; }
+tr.fr td { border:0; }
+/*tr:last-child {border-bottom: 0; }*/
+th { padding: 4px 0px 4px 2px;  }
+td { padding: 4px 0px 4px 2px; height: 2.7rem; min-width: 150px; border-top: 1px solid #ccc;}
+
+select {
+  height: 30px;
+  border: 1px solid #aaa;
+  margin: 2px 0px 2px 0px; padding:0px; 
+  outline: none;
+  vertical-align:bottom;
+  border-radius:4px;
+  color: black;
+  /*border:1px solid #aaa;*/
+}
+
+select:focus {
+  border: 1px solid rgba(81, 203, 238, 1);
+  box-shadow: 0 0 6px rgba(81, 203, 238, 1);
+}
+
+input[type=number] {
+  position:relative;
+  width:65px; height: 30px; margin: 2px 4px 2px 0px; 
+  padding:2px;
+  /*padding-right:20px;*/
+  vertical-align:middle;
+  font-size:120%;
+  border:1px solid #aaa;
+  outline: none;
+  text-align:center;
+  -moz-appearance:textfield;
+  border-radius:4px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance:none;
+  margin:0;
+}
+input[type=number]:focus {
+  border: 1px solid rgba(81, 203, 238, 1);
+  box-shadow: 0 0 6px rgba(81, 203, 238, 1);
 }
 
 /*VSimportdialog code */
