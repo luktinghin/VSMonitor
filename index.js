@@ -242,6 +242,7 @@ function removeFrame() {
 		</div>
 	`;
 	displayDialog("Delete row",text);
+	updatedelete(document.getElementById('selectdelete').value*1);
 }
 
 function updatedelete(idnum) {
