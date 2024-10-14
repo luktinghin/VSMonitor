@@ -401,7 +401,7 @@ function handleFile(entry, successCallback, errorCallback, param_sourceid, param
 		reader[param_sourceid].onload = function() {
 			console.log("---reading file " + param_sourceid);
 			filetype = file.type;
-			successCallback(reader[param_sourceid].result, param_sourceid, filetype);
+			successCallback(reader[param_sourceid].result, param_sourceid, filetype, param_reload, param_reload_chartidnum);
 		}
 		reader.onerror = function() {
 			errorCallback(readerX[param_sourceid].error);
