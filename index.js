@@ -211,7 +211,7 @@ function preprocessTime(inputTime,param1) {
     }
   }
 
-function removeFrame(idnum) {
+function removeFrame() {
 	customselect = "<select id='selectdelete' onchange='updatedelete(this.value)'>";
 	for (i = 0; i<infoObjects.length; i++) {
 		if (infoObjects[i] != undefined) {
