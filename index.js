@@ -205,6 +205,16 @@ function preprocessTime(inputTime,param1) {
     }
   }
 
+function removeFrame(idnum) {
+	removeChart(idnum);
+}
+
+function removeChart(idnum) {
+	chartObjects[idnum].destroy();
+	infoObjects[idnum] = {};
+	document.getElementById("chart" + idnum).remove();
+}
+
 function setConfig(idnum) {
 	let tempSource;
 	let tempVariable;
