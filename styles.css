@@ -434,8 +434,9 @@ a.button.tinybutton > i {
   padding: 10px 15%;
   position: fixed;
   bottom: 0;
-  background: #444A;
+  background: #5559;
   justify-content: space-between;
+  backdrop-filter: blur(10px);
 }
 
 table {
