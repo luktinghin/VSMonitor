@@ -378,7 +378,7 @@ function applyDisplayChanges(idnum) {
 	if (infoObjects[idnum].xAxisStepSize != '') {
 		chartObjects[idnum].options.scales.x.time.stepSize = infoObjects[idnum].xAxisStepSize *1;
 	} else {
-		chartObjects[idnum].options.scales.x.time.stepSize = undefined;
+		chartObjects[idnum].options.scales.x.time.stepSize = 10;
 	}
 	chartObjects[idnum].data.datasets[0].borderColor = infoObjects[idnum].colorvalue;
 	chartObjects[idnum].data.datasets[0].backgroundColor = infoObjects[idnum].colorvalue;
