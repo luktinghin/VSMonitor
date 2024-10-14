@@ -419,7 +419,7 @@ function readData3(data, param_sourceid, filetype, param_reload, param_reload_ch
 		param1 = param_sourceid + 1;
 		prefix = "(" + param1 + "/" + fileEntryLength + ") ";
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
-		if ((sourceData[param].length > 0) && (sourceData[param_sourceid][0].Time != undefined)) {
+		if ((sourceData[param_sourceid].length > 0) && (sourceData[param_sourceid][0].Time != undefined)) {
 			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param_sourceid].name + " - data loaded successfully: " + tempLength + " entries<br>";	
 		} else {
 			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param_sourceid].name + " - file read but no suitable data detected.<br>";	
@@ -427,7 +427,7 @@ function readData3(data, param_sourceid, filetype, param_reload, param_reload_ch
 		sourceDataInfo[param_sourceid] = {};
 		sourceDataInfo[param_sourceid].name = fileEntry[param_sourceid].name;
 		sourceDataInfo[param_sourceid].variables = Object.keys(sourceData[param_sourceid][0]);
-		tempTimeIndex = sourceDataInfo[param].variables.indexOf("Time");
+		tempTimeIndex = sourceDataInfo[param_sourceid].variables.indexOf("Time");
 		if (tempTimeIndex > -1) {
 			sourceDataInfo[param_sourceid].variables.splice(tempTimeIndex,1);
 		}
