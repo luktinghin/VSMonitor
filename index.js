@@ -246,7 +246,7 @@ function removeFrame() {
 
 function updatedelete(idnum) {
 	idnum = idnum * 1;
-	let x = infoObjects[idnum].name;
+	let x = infoObjects[idnum].label;
 	document.getElementById("rowname").textContent = x;
 }
 
@@ -303,9 +303,9 @@ function setConfig(idnum) {
 									<option value='rgba(21,101,192,0.8)'>Blue</option>
 									<option value='rgba(251,192,45,0.8)'>Yellow</option>
 									<option value='rgb(9, 203, 93,0.8)'>Green</option>
-									<option value='rgb(255, 97, 202,0.8)'>Pink</option>
+									<option value='rgb(255, 97, 191,0.8)'>Pink</option>
 									<option value='rgb(53, 196, 165,0.8)'>Cyan</option>
-									<option value='rgb(196, 77, 240,0.8)'>Magenta</option>
+									<option value='rgb(165, 65, 240,0.8)'>Purple</option>
 								</select>
 							</td>
 					</table>
