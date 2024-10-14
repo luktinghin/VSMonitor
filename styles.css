@@ -432,6 +432,9 @@ a.button.tinybutton > i {
   border-top: 1px solid #666;
   width: 100%;
   padding: 10px 15%;
+  position: fixed;
+  bottom: 0;
+  background: #444A;
   justify-content: space-between;
 }
 
