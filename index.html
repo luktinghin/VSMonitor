@@ -21,15 +21,19 @@
 		<!--<x-chart-component id="display1"></x-chart-component>-->
 		<div id="main-welcome">
 			<div id="main-welcome-inner">
-				<div>Welcome to VSdisplay</div>
-				<div>VSdisplay is a web viewer for data visualization for VSCapture .CSV files.</div>
-				<div>You can drop-and-drop .CSV files generated from VSCapture to begin. Then, by creating a "frame", which is a row of parameter display, you can visualize the data using a trend line on a chart and an information readout. Basic customization options are provided via "options". Limited functionality now as VSdisplay is currently being actively developed.</div>
+				<h1>VSdisplay</h1>
+				<h2>VSdisplay is a web viewer for data visualization for VSCapture .CSV files.</h2>
+				<h3>You can drop-and-drop .CSV files generated from VSCapture to begin. Then, by creating a <b>row</b> of parameter display, you can visualize the data using a trend line on a chart and an information readout. Basic customization options are provided via "options". Limited functionality now as VSdisplay is currently being actively developed.</h3>
+				<div id="buttonrow">
+					<a class="button invert" onclick="setmodal('modalVSimport');">BEGIN</a>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div id="card_actions">
-		<button onclick="setmodal('modalVSimport');">Load CSV</button>
-		<button onclick="createFrame();">Create frame</button>
+		<a class="button actionbtn" onclick="createFrame();"><i class="fas fa-plus-circle" style="padding-right:6px"></i>Create row</a>
+		<a class="button actionbtn" onclick="removeFrame();"><i class="fas fa-minus-circle" style="padding-right:6px"></i>Remove row</a>
+		<a class="button actionbtn" onclick="reloadAll()"><i class="fas fa-sync-alt" style="padding-right:6px"></i>Reload all</a>
 		<!--
 		<button onclick="customFunction(AS3Data,'Time','ECG_HR',1)">Feed ECG_HR data from AS3Data into Frame 1</button>
 		<button onclick="customFunction(BISData,'Time','BIS',2)">Feed BIS data from BISData into Frame 2</button>
@@ -68,7 +72,7 @@
 						</div>-->
 					</div>
 					<div id="VSimportbuttons">
-						<a class="button invert disabled" id="VSimportconfirmbtn" onclick="hidemodal('modalVSimport');">Confirm</a>
+						<a class="button invert disabled" id="VSimportconfirmbtn" onclick="hidemodal('modalVSimport'); exitwelcome();">Confirm</a>
 						<!--<a class="button" id="VSloadinfusionbtn" onclick="VSimporttogglescreen(2)">Load Infusion Data</a>-->
 						<a class="button alt right" onclick="hidemodal('modalVSimport');">Cancel</a>
 					</div>

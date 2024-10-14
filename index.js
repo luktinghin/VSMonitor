@@ -20,7 +20,7 @@ class ChartComponent extends HTMLElement {
 			<div class="chart-left">
 				<div class='chart-header'>
 					<div style="" id='chart-header-${num}'>Parameter ${num}</div>
-					<div style="float:right;font-size:0.75rem;text-align:right"><a class="button paramoptions" onclick="setConfig(${num})"><i style="padding-right:6px" class="fas fa-cog"></i>Options</a></div>
+					<div style="float:right;font-size:0.75rem;text-align:right"><a class="button actionbtn" onclick="setConfig(${num})"><i style="padding-right:6px" class="fas fa-cog"></i>Options</a></div>
 				</div>
 				<div class='chart-container' id='chart-container-${num}'>
 					<canvas id="chart${num}">
@@ -347,6 +347,11 @@ function hidemodal(param) {
 	modal = undefined;
 }
 
+function exitwelcome() {
+	document.getElementById('card_actions').style.display='flex';
+	document.getElementById('main-welcome').style.display='none';
+
+}
 
 /* drop handling */
 
@@ -382,13 +387,14 @@ function handleDrop3(e) {
   fileList = dt.files;
   items = dt.items;
   document.getElementById("VSimportmessage").innerHTML = "";
+  fileEntryCount = fileEntry.length;
   for (count = 0; count < items.length; count++) {
-  	fileEntry[count] = items[count].webkitGetAsEntry();
+  	fileEntry[count + fileEntryCount] = items[count].webkitGetAsEntry();
 		console.log(items[count]);
 		console.log(items[count].type);
 		console.log("drop event fired - file " + count);
-		console.log(fileEntry[count]);
-		handleFile(fileEntry[count], readData3, errorData, count);
+		console.log(fileEntry[count + fileEntryCount]);
+		handleFile(fileEntry[count + fileEntryCount], readData3, errorData, count + fileEntryCount);
   }
 }
 
@@ -439,6 +445,11 @@ function readData3(data, param_sourceid, filetype, param_reload, param_reload_ch
 	} else {
 		document.getElementById("VSimportmessage").innerHTML = "Fatal error: unrecognized file."
 	}
+}
+
+function reload(idnum) {
+	tempSourceID = infoObjects[idnum].sourceid;
+	handleFile(fileEntry[tempSourceID],readData3,errorData,tempSourceID,true,idnum);
 }
 
 function errorData(data) {

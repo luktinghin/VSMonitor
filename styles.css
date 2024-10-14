@@ -247,6 +247,38 @@ button, select, input {
   max-height: 70dvh;
 }
 
+#main-welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80dvh;
+}
+
+#main-welcome-inner {
+  width: 50%;
+  color: #999;
+}
+
+h1 {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  font-style: italic;
+  color: #ddd;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+
+
 /*buttons */
 a.button {
   border-radius:2em;
@@ -355,7 +387,7 @@ a.button.tinybutton:hover, a.button.tinybutton:active {
 a.button.tinybutton > i {
   padding-right: 3px;
 }
-.button.paramoptions {
+.button.actionbtn {
   background: transparent;
   text-align: left;
   border-color: transparent;
@@ -365,10 +397,20 @@ a.button.tinybutton > i {
   margin: 0px;
 }
 
-.button.paramoptions:hover, .button.paramoptions:active {
+.button.actionbtn:hover, .button.actionbtn:active {
   background:transparent;
   border-color:#ddd;
 }
+
+#card_actions {
+  display: none;
+  margin-top: 20px;
+  border-top: 1px solid #666;
+  width: 100%;
+  padding: 10px 15%;
+  justify-content: space-between;
+}
+
 /*VSimportdialog code */
 #VSmodalscreencontainer {
   position:relative;
