@@ -399,7 +399,7 @@ function handleFile(entry, successCallback, errorCallback, param_sourceid, param
 		console.log('fileEntry File Event fired');
 		reader[param_sourceid] = new FileReader();
 		reader[param_sourceid].onload = function() {
-			console.log("---reading file " + param);
+			console.log("---reading file " + param_sourceid);
 			filetype = file.type;
 			successCallback(reader[param_sourceid].result, param_sourceid, filetype);
 		}
