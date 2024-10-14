@@ -77,7 +77,7 @@ infoObjects = new Array();
 function createFrame(param) {
 	if (param == undefined) {
 		//infoobjects is used because if a chart is deleted, will lead to bug in counting
-		if (infoObjects.length == undefined) {
+		if (infoObjects.length == 0) {
 			param = 1;
 		} else {
 			param = infoObjects.length;	
@@ -216,7 +216,8 @@ function removeFrame() {
 	for (i = 0; i<infoObjects.length; i++) {
 		if (infoObjects[i] != undefined) {
 			if (infoObjects[i] != {}) {
-				customselect += "<option value='" + i + "'>" + i + "</option>";
+				count = i+1;
+				customselect += "<option value='" + count + "'>" + count + "</option>";
 			}
 		}
 	};
