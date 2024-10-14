@@ -70,13 +70,19 @@ sourceData = new Array();
 
 sourceDataInfo = new Array();
 
-chartObjects = {};
+chartObjects = new Array();
 
-infoObjects = {};
+infoObjects = new Array();
 
 function createFrame(param) {
 	if (param == undefined) {
-		param = document.getElementsByTagName("x-chart-component").length + 1;
+		//infoobjects is used because if a chart is deleted, will lead to bug in counting
+		if (infoObjects.length == undefined) {
+			param = 1;
+		} else {
+			param = infoObjects.length + 1;	
+		}
+		
 	}
 	el = document.getElementById("main-body");
 	el1 = document.createElement("x-chart-component");
@@ -206,13 +212,47 @@ function preprocessTime(inputTime,param1) {
   }
 
 function removeFrame(idnum) {
-	removeChart(idnum);
+	customselect = "<select id='selectdelete' onchange='updatedelete(this.value)'>";
+	for (i = 0; i<infoObjects.length; i++) {
+		if (infoObjects[i] != undefined) {
+			if (infoObjects[i] != {}) {
+				customselect += "<option value='" + i + "'>" + i + "</option>";
+			}
+		}
+	};
+	customselect += "</select>";
+	text = `
+		<div style='width:50%;margin:0 auto'>
+			<div class="tableheading">Select row to remove</div>
+				<table style='width:100%'>
+					<tr class="fr">
+						<td>Row number</td>
+						<td>${customselect}</td>
+					</tr>
+					<tr>
+						<td>Row name</td>
+						<td><span id="rowname"></span</td>
+					</tr>
+				</table>
+		</div>
+		<div class="configbuttons">
+			<a class="button invert" onclick="removeChart(document.getElementById('selectdelete').value*1)">DELETE</a>
+			<a class="button">Cancel</a>
+		</div>
+	`;
+	displayDialog("Delete row",text);
+}
+
+function updatedelete(idnum) {
+	idnum = idnum * 1;
+	let x = infoObjects[idnum].name;
+	document.getElementById("rowname").textContent = x;
 }
 
 function removeChart(idnum) {
 	chartObjects[idnum].destroy();
 	infoObjects[idnum] = {};
-	document.getElementById("chart" + idnum).remove();
+	document.getElementById("display" + idnum).remove();
 }
 
 function setConfig(idnum) {
