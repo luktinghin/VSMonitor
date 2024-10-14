@@ -392,46 +392,49 @@ function handleDrop3(e) {
   }
 }
 
-readerX = new Array();
+reader = new Array();
 
-function handleFile(entry, successCallback, errorCallback, param) {
+function handleFile(entry, successCallback, errorCallback, param_sourceid, param_reload, param_reload_chartidnum) {
 	entry.file(function (file) {
 		console.log('fileEntry File Event fired');
-		readerX[param] = new FileReader();
-		readerX[param].onload = function() {
+		reader[param_sourceid] = new FileReader();
+		reader[param_sourceid].onload = function() {
 			console.log("---reading file " + param);
 			filetype = file.type;
-			successCallback(readerX[param].result, param, filetype);
+			successCallback(reader[param_sourceid].result, param_sourceid, filetype);
 		}
-		readerX.onerror = function() {
-			errorCallback(readerX[param].error);
+		reader.onerror = function() {
+			errorCallback(readerX[param_sourceid].error);
 		}
-		readerX[param].readAsText(file);
+		reader[param_sourceid].readAsText(file);
 	}, errorCallback);
 }
 
-
-
-function readData3(data, param, filetype) {
+function readData3(data, param_sourceid, filetype, param_reload, param_reload_chartidnum) {
 	if (filetype == "text/csv") {
 		console.log("---readdata fired");
-		sourceData[param] = CSVtoJSON(data);
-		tempLength = sourceData[param].length - 1;
+		sourceData[param_sourceid] = CSVtoJSON(data);
+		tempLength = sourceData[param_sourceid].length - 1;
 		fileEntryLength = fileEntry.length;
-		param1 = param + 1;
+		param1 = param_sourceid + 1;
 		prefix = "(" + param1 + "/" + fileEntryLength + ") ";
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
-		if ((sourceData[param].length > 0) && (sourceData[param][0].Time != undefined)) {
-			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param].name + " - data loaded successfully: " + tempLength + " entries<br>";	
+		if ((sourceData[param].length > 0) && (sourceData[param_sourceid][0].Time != undefined)) {
+			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param_sourceid].name + " - data loaded successfully: " + tempLength + " entries<br>";	
 		} else {
-			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param].name + " - file read but no suitable data detected.<br>";	
+			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param_sourceid].name + " - file read but no suitable data detected.<br>";	
 		}
-		sourceDataInfo[param] = {};
-		sourceDataInfo[param].name = fileEntry[param].name;
-		sourceDataInfo[param].variables = Object.keys(sourceData[param][0]);
+		sourceDataInfo[param_sourceid] = {};
+		sourceDataInfo[param_sourceid].name = fileEntry[param_sourceid].name;
+		sourceDataInfo[param_sourceid].variables = Object.keys(sourceData[param_sourceid][0]);
 		tempTimeIndex = sourceDataInfo[param].variables.indexOf("Time");
 		if (tempTimeIndex > -1) {
-			sourceDataInfo[param].variables.splice(tempTimeIndex,1);
+			sourceDataInfo[param_sourceid].variables.splice(tempTimeIndex,1);
+		}
+		if (param_reload) {
+			//force reload of graphics, after reloading of fileEntry
+			console.log("---reload fileEntry fired, proceed to render data");
+			renderData(sourceData[param_sourceid],"Time",infoObjects[param_reload_chartidnum].label,param_reload_chartidnum);
 		}
 	} else {
 		document.getElementById("VSimportmessage").innerHTML = "Fatal error: unrecognized file."
