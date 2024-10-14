@@ -80,7 +80,7 @@ function createFrame(param) {
 		if (infoObjects.length == undefined) {
 			param = 1;
 		} else {
-			param = infoObjects.length + 1;	
+			param = infoObjects.length;	
 		}
 		
 	}
