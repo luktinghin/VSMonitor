@@ -431,11 +431,11 @@ a.button.tinybutton > i {
   margin-top: 20px;
   border-top: 1px solid #666;
   width: 100%;
-  padding: 10px 15%;
+  padding: 10px 10%;
   position: fixed;
   bottom: 0;
   background: #5559;
-  justify-content: space-between;
+  justify-content: space-evenly;
   backdrop-filter: blur(10px);
 }
 
@@ -580,4 +580,67 @@ input[type=number]:focus {
   padding-bottom: 10px;
 }
 
+@media (max-width: 599px) {
+  #main-body {
 
+  }
+  .chart-outer {
+    flex-direction: column;
+    gap: 0px;
+  }
+  .chart-left {
+    border-radius: 9px 9px 0 0;
+  }
+  .chart-right {
+    border-radius: 0 0 9px 9px;
+  }
+  #card_actions {
+    flex-direction: column;
+    font-size: 0.8rem;
+  }
+}
+@media (min-width: 600px) {
+  #main-body {
+    width: 600px;
+    margin: 0 auto;
+  }
+  #card_actions {
+    padding: 10px 0;
+  }
+}
+@media (min-width: 700px) {
+  #main-body {
+    width: 700px;
+    margin: 0 auto;
+  }
+  #card_actions {
+    padding: 10px 0;
+  }
+}
+@media (min-width: 800px) {
+  #main-body {
+    width: 800px;
+    margin: 0 auto;
+  }
+  #card_actions {
+    padding: 10px 5%;
+  }
+}
+@media (min-width: 1000px) {
+  #main-body {
+    width: 1000px;
+    margin: 0 auto;
+  }
+  #card_actions {
+    padding: 10px 10%;
+  }
+}
+@media (min-width: 1200px) {
+  #main-body {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  #card_actions {
+    padding: 10px 10%;
+  }
+}
