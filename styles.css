@@ -127,6 +127,7 @@ button, select, input {
 
 #main-body {
   padding: 10px;
+  padding-bottom: 60px;
 }
 
 .chart-outer {
