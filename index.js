@@ -262,7 +262,7 @@ function setConfig(idnum) {
 	}
 	contents = `
 		<div>
-			<div style="display:flex;justify-content:space-around">
+			<div class='config-container' style="display:flex;justify-content:space-around">
 				<div>
 					<div class='tableheading'>Source settings</div>
 					<table>

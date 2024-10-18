@@ -582,7 +582,7 @@ input[type=number]:focus {
 
 @media (max-width: 599px) {
   #main-body {
-
+    padding-bottom: 150px;
   }
   .chart-outer {
     flex-direction: column;
@@ -591,13 +591,21 @@ input[type=number]:focus {
   .chart-left {
     border-radius: 9px 9px 0 0;
     border-bottom: 0;
+    background: #111;
+    border-color: #ddd;
   }
   .chart-right {
     border-radius: 0 0 9px 9px;
+    border-top: 0;
+    border-color: #ddd;
+    box-shadow: inset 0px 10px 8px -5px rgba(255,255,255,0.3);
   }
   #card_actions {
     flex-direction: column;
     font-size: 0.8rem;
+  }
+  .config-container {
+    flex-direction: column;
   }
 }
 @media (min-width: 600px) {
