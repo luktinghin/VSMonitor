@@ -136,7 +136,6 @@ button, select, input {
   margin: 10px 0;
 }
 .chart-left {
-  flex-basis: 75%;
   padding: 10px;
   border-radius: 9px;
   border: 1px solid #666;
@@ -144,7 +143,7 @@ button, select, input {
   color: white;
 }
 .chart-right {
-  flex-basis: 25%;
+  flex-grow: 1;
   padding: 10px;
   border-radius: 9px;
   border: 1px solid #666;
@@ -591,6 +590,7 @@ input[type=number]:focus {
   }
   .chart-left {
     border-radius: 9px 9px 0 0;
+    border-bottom: 0;
   }
   .chart-right {
     border-radius: 0 0 9px 9px;
@@ -605,6 +605,9 @@ input[type=number]:focus {
     width: 600px;
     margin: 0 auto;
   }
+  .chart-left {
+    flex-basis: 480px;
+  }
   #card_actions {
     padding: 10px 0;
   }
@@ -613,6 +616,9 @@ input[type=number]:focus {
   #main-body {
     width: 700px;
     margin: 0 auto;
+  }
+  .chart-left {
+    flex-basis: 525px;
   }
   #card_actions {
     padding: 10px 0;
@@ -623,6 +629,9 @@ input[type=number]:focus {
     width: 800px;
     margin: 0 auto;
   }
+  .chart-left {
+    flex-basis: 600px;
+  }
   #card_actions {
     padding: 10px 5%;
   }
@@ -632,6 +641,9 @@ input[type=number]:focus {
     width: 1000px;
     margin: 0 auto;
   }
+  .chart-left {
+    flex-basis: 750px;
+  }
   #card_actions {
     padding: 10px 10%;
   }
@@ -640,6 +652,9 @@ input[type=number]:focus {
   #main-body {
     width: 1200px;
     margin: 0 auto;
+  }
+  .chart-left {
+    flex-basis: 960px;
   }
   #card_actions {
     padding: 10px 10%;
