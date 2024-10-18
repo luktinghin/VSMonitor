@@ -606,7 +606,7 @@ input[type=number]:focus {
     margin: 0 auto;
   }
   .chart-left {
-    flex-basis: 480px;
+    flex-basis: 440px;
   }
   #card_actions {
     padding: 10px 0;
