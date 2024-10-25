@@ -499,6 +499,7 @@ function readData3(data, param_sourceid, filetype, param_reload, param_reload_ch
 			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param_sourceid].name + " - file read but no suitable data detected.<br>";	
 		}
 		sourceDataInfo[param_sourceid] = {};
+		sourceDataInfo[param_sourceid].method = "entry";
 		sourceDataInfo[param_sourceid].name = fileEntry[param_sourceid].name;
 		sourceDataInfo[param_sourceid].variables = Object.keys(sourceData[param_sourceid][0]);
 		tempTimeIndex = sourceDataInfo[param_sourceid].variables.indexOf("Time");
@@ -515,9 +516,137 @@ function readData3(data, param_sourceid, filetype, param_reload, param_reload_ch
 	}
 }
 
+
+//from web.dev
+let fileHandle = new Array();
+const pickerOp = {
+    types: [
+      {
+        description: "CSV",
+        accept: {
+          "text/csv": [".csv"],
+        },
+      },
+    ],
+    multiple: true,
+}
+const openFileOrFiles = async (multiple = true) => {
+  // Feature detection. The API needs to be supported
+  // and the app not run in an iframe.
+  const supportsFileSystemAccess =
+    "showOpenFilePicker" in window &&
+    (() => {
+      try {
+        return window.self === window.top;
+        console.log("fs access supported");
+      } catch {
+        return false;
+      }
+    })();
+  // If the File System Access API is supported…
+  if (supportsFileSystemAccess) {
+    let fileOrFiles = undefined;
+    try {
+      // Show the file picker, optionally allowing multiple files.
+      const handles = await showOpenFilePicker(pickerOp);
+      // Only one file is requested.
+      if (!multiple) {
+        // Add the `FileSystemFileHandle` as `.handle`.
+        fileOrFiles = await handles[0].getFile();
+        fileOrFiles.handle = handles[0];
+        fileHandle[0] = handles[0];
+        readFileHandle(0);
+      } else {
+        fileOrFiles = await Promise.all(
+          handles.map(async (handle) => {
+            const file = await handle.getFile();
+            // Add the `FileSystemFileHandle` as `.handle`.
+            file.handle = handle;
+            fileHandle.push(handle);
+            readFileHandle(fileHandle.length-1);
+            return file;
+          })
+        );
+      }
+    } catch (err) {
+      // Fail silently if the user has simply canceled the dialog.
+      if (err.name !== 'AbortError') {
+        console.error(err.name, err.message);
+      }
+    }
+    return fileOrFiles;
+  }
+  // Fallback if the File System Access API is not supported.
+  // off the following code
+  /*
+  return new Promise((resolve) => {
+    // Append a new `<input type="file" multiple? />` and hide it.
+    const input = document.createElement('input');
+    input.style.display = 'none';
+    input.type = 'file';
+    document.body.append(input);
+    if (multiple) {
+      input.multiple = true;
+    }
+    // The `change` event fires when the user interacts with the dialog.
+    input.addEventListener('change', () => {
+      // Remove the `<input type="file" multiple? />` again from the DOM.
+      input.remove();
+      // If no files were selected, return.
+      if (!input.files) {
+        return;
+      }
+      // Return all files or just one file.
+      resolve(multiple ? Array.from(input.files) : input.files[0]);
+    });
+    // Show the picker.
+    if ('showPicker' in HTMLInputElement.prototype) {
+      input.showPicker();
+    } else {
+      input.click();
+    }
+  });
+  */
+};
+
+const readFileHandle = async (param_sourceid, param_reload, param_reload_chartidnum) => {
+	let fileX = await fileHandle[param_sourceid].getFile();
+	let textX = await fileX.text();
+	sourceData[param_sourceid] = CSVtoJSON(textX);
+		tempLength = sourceData[param_sourceid].length - 1;
+		fileEntryLength = fileHandle.length;
+		param1 = param_sourceid + 1;
+		prefix = "(" + param1 + "/" + fileEntryLength + ") ";
+		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
+		if ((sourceData[param_sourceid].length > 0) && (sourceData[param_sourceid][0].Time != undefined)) {
+			document.getElementById("VSimportmessage").innerHTML += prefix + fileHandle[param_sourceid].name + " - data loaded successfully: " + tempLength + " entries<br>";	
+		} else {
+			document.getElementById("VSimportmessage").innerHTML += prefix + fileHandle[param_sourceid].name + " - file read but no suitable data detected.<br>";	
+		}
+	sourceDataInfo[param_sourceid] = {};
+	sourceDataInfo[param_sourceid].method = "handle";
+	sourceDataInfo[param_sourceid].name = fileHandle[param_sourceid].name;
+	sourceDataInfo[param_sourceid].variables = Object.keys(sourceData[param_sourceid][0]);
+	tempTimeIndex = sourceDataInfo[param_sourceid].variables.indexOf("Time");
+	if (tempTimeIndex > -1) {
+		sourceDataInfo[param_sourceid].variables.splice(tempTimeIndex,1);
+	}
+	if (param_reload) {
+			//force reload of graphics, after reloading of fileEntry
+			console.log("---reload fileEntry fired, proceed to render data");
+			renderData(sourceData[param_sourceid],"Time",infoObjects[param_reload_chartidnum].label,param_reload_chartidnum);
+	}
+}
+
 function reload(idnum) {
 	tempSourceID = infoObjects[idnum].sourceid;
-	handleFile(fileEntry[tempSourceID],readData3,errorData,tempSourceID,true,idnum);
+	if (sourceDataInfo[tempSourceID].method == "entry") {
+		//loaded as datatransfer entry
+		handleFile(fileEntry[tempSourceID],readData3,errorData,tempSourceID,true,idnum);
+	} else if (sourceDataInfo[tempSourceID].method == "handle") {
+		readFileHandle(tempSourceID);
+	}
+	
 }
 
 function reloadAll() {

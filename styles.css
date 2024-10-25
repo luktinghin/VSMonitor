@@ -411,6 +411,16 @@ a.button.tinybutton:hover, a.button.tinybutton:active {
 a.button.tinybutton > i {
   padding-right: 3px;
 }
+
+a.uploadlink {
+  color: #198964;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 5px solid transparent;
+  border-image: linear-gradient(90deg, #198964 , #00ff00);
+  border-image-slice: 1;
+  text-wrap: nowrap;
+}
 .button.actionbtn {
   background: transparent;
   text-align: left;
@@ -581,6 +591,9 @@ input[type=number]:focus {
 }
 
 @media (max-width: 599px) {
+  #main-welcome-inner {
+    width: 95%;
+  }
   #main-body {
     padding-bottom: 150px;
   }
@@ -609,6 +622,9 @@ input[type=number]:focus {
   }
 }
 @media (min-width: 600px) {
+  #main-welcome-inner {
+    width: 75%;
+  }
   #main-body {
     width: 600px;
     margin: 0 auto;
@@ -633,6 +649,9 @@ input[type=number]:focus {
   }
 }
 @media (min-width: 800px) {
+  #main-welcome-inner {
+    width: 60%;
+  }
   #main-body {
     width: 800px;
     margin: 0 auto;
@@ -657,6 +676,9 @@ input[type=number]:focus {
   }
 }
 @media (min-width: 1200px) {
+  #main-welcome-inner {
+    width: 50%;
+  }
   #main-body {
     width: 1200px;
     margin: 0 auto;
