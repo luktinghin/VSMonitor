@@ -195,8 +195,24 @@ function preprocessTime(inputTime,param1) {
   function CSVtoJSON(csv) {
     if (csv !== null) {
       var lines = csv.split(/\r\n|\n/);
-      //console.log(lines);
       const headers = lines.shift().split(/\t|,/);
+
+      var jsonarray = lines.map((line) => {
+        const values = line.split(/\t|,/);
+        return headers.reduce(
+          (obj, header, index) => ((obj[header] = values[index]), obj),
+          {}
+        );
+      });
+      console.log(jsonarray);
+      return jsonarray;
+    }
+  }
+
+  function CSVtoJSON2(csv,customHeader) {
+    if (csv !== null) {
+      var lines = csv.split(/\r\n|\n/);
+      const headers = customHeader.split(/\t|,/);
 
       var jsonarray = lines.map((line) => {
         const values = line.split(/\t|,/);
@@ -647,10 +663,25 @@ function openlabs() {
 		<li>inputName - name of data source, used for creating rows in charts</li>
 		<li>inputIndex - if source data index is known, can provide, otherwise create new. this will overwrite the existing sourcedata.</li>
 		</ul>
-		<div>Input the object as CSV here</div>
+		<div>Input the object as CSV here. this labs script will convert CSV to JSON first.</div>
 		<textarea style='width:100%' id='customobject'></textarea>
 		Name of this object:<input id='customname'>
 		<div><button onclick='VSimportData(CSVtoJSON(document.getElementById("customobject").value),document.getElementById("customname").value)'>VSimportData</button></div>
+		<hr>
+		<h4>VSaddData(inputData,inputIndex)</h4>
+		<div>this function receives new data from the datastream and adds to an existing sourceData </div>
+		<div>assuming the inputData are new lines in CSV format</div>
+		<div>and get the headers already previously stored when the sourceData was first loaded</div>
+		<div>Insert inputData, as CSV:</div>
+		<textarea id='custominsertdata'></textarea>
+		<div>Specify the inputIndex of the sourceData</div>
+		<input id='custominsertindex'>
+		<div><button onclick='VSaddData(document.getElementById("custominsertdata").value,document.getElementById("custominsertindex").value*1)'>Add Data</button></div>
+		<hr>
+		<h4>VSquerySource(inputName)</h4>
+		<div>Looks for the sourceData index with the provided name</div>
+		<input id='customqueryname'>
+		<div><button onclick='alert("the sourceData index for this name is " + VSquerySource(document.getElementById("customqueryname").value))'>Query Source</button></div>
 	`
 	displayDialog("Labs",el1);
 }
@@ -673,6 +704,7 @@ function VSimportData(inputData, inputName, inputIndex) {
 	sourceDataInfo[tempIndex].method = "internal";
 	sourceDataInfo[tempIndex].name = inputName;
 	sourceDataInfo[tempIndex].variables = Object.keys(sourceData[tempIndex][0]);
+	sourceDataInfo[tempIndex].headers = Object.keys(sourceData[tempIndex][0]).toString();
 	tempTimeIndex = sourceDataInfo[tempIndex].variables.indexOf("Time");
 	if (tempTimeIndex > -1) {
 		sourceDataInfo[tempIndex].variables.splice(tempTimeIndex,1);
@@ -681,11 +713,14 @@ function VSimportData(inputData, inputName, inputIndex) {
 }
 
 function VSaddData(inputData, inputIndex) {
-	//this function receives new data from the datastream and writes to an exsiting sourceData
-	if (sourceData[inputIndex] == undefined) {
-		sourceData[inputIndex] = new Array();
+	//this function receives new data from the datastream and adds to an existing sourceData 
+	//assuming the inputData are new lines in CSV format
+	//and get the headers already previously stored when the sourceData was first loaded
+	tempArray = CSVtoJSON2(inputData,sourceDataInfo[inputIndex].headers);
+	for (count = 0; count<tempArray.length; count++) {
+		sourceData[inputIndex].push(tempArray[count]);
 	}
-	sourceData.push(inputData);
+	console.log(sourceData[inputIndex]);
 }
 
 function VSquerySource(inputName) {
@@ -714,8 +749,9 @@ function reload(idnum) {
 		handleFile(fileEntry[tempSourceID],readData3,errorData,tempSourceID,true,idnum);
 	} else if (sourceDataInfo[tempSourceID].method == "handle") {
 		readFileHandle(tempSourceID);
+	} else if (sourceDataInfo[tempSourceID].method == "internal") {
+		renderData(sourceData[tempSourceID],"Time",infoObjects[idnum].label,idnum);
 	}
-	
 }
 
 function reloadAll() {
