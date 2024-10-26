@@ -12,7 +12,7 @@
 	<meta name="description" content="Graphical Display for VSCapture">
     <meta name="keywords" content="VSCapture">
     <meta name="author" content="Terence Luk">
-    <title>VSDisplay - VSCapture Data Visualization Tool</title>
+    <title>VSMonitor - VSCapture Data Visualization Tool</title>
 </head>
 <body>
 
@@ -21,9 +21,9 @@
 		<!--<x-chart-component id="display1"></x-chart-component>-->
 		<div id="main-welcome">
 			<div id="main-welcome-inner">
-				<h1>VSDisplay</h1>
-				<h2>VSDisplay is a web viewer for data visualization of VSCapture .CSV files.</h2>
-				<h3>You can drop-and-drop .CSV files generated from VSCapture to begin. Then, by creating a <b>row</b> of parameter display, you can visualize the data using a trend line on a chart and an information readout. Basic customization options are provided via "options". Limited functionality now as VSdisplay is currently being actively developed.</h3>
+				<h1>VSMonitor</h1>
+				<h2>VSMonitor is a web viewer for data visualization of VSCapture .CSV files.</h2>
+				<h3>You can drop-and-drop .CSV files generated from VSCapture to begin. Then, by creating a <b>row</b> of parameter display, you can visualize the data using a trend line on a chart and an information readout. Basic customization options are provided via "options". Limited functionality now as VSMonitor is currently being actively developed.</h3>
 				<div id="buttonrow">
 					<a class="button invert" onclick="setmodal('modalVSimport');">START</a>
 				</div>
@@ -35,6 +35,7 @@
 		<a class="button actionbtn" onclick="removeFrame();"><i class="fas fa-minus-circle fa-fw" style="padding-right:6px"></i>Remove row</a>
 		<a class="button actionbtn" onclick="reloadAll()"><i class="fas fa-sync-alt fa-fw" style="padding-right:6px"></i>Refresh all</a>
 		<a class="button actionbtn" onclick="setmodal('modalVSimport')"><i class="fas fa-file-csv fa-fw" style="padding-right:6px"></i>Add new CSV</a>
+		<a class="button actionbtn" onclick="openlabs();"><i class="fas fa-flask fa-fw" style="padding-right:6px"></i>Labs</a>
 		<!--
 		<button onclick="customFunction(AS3Data,'Time','ECG_HR',1)">Feed ECG_HR data from AS3Data into Frame 1</button>
 		<button onclick="customFunction(BISData,'Time','BIS',2)">Feed BIS data from BISData into Frame 2</button>
@@ -45,8 +46,8 @@
 	<!--modals-->
 		<div id="modalDialog" class="modal alt">
 			<div class="modal-content alt" id="modalDialogcontent">
-				<div class="modal-header alt"><span class="title">VSdisplay</span><span class="close alt" onClick="hidemodal('modalDialog')">&times;</span></div>
-				<div class="modal-body alt">VSdisplay is loading up...</div>
+				<div class="modal-header alt"><span class="title">VSMonitor</span><span class="close alt" onClick="hidemodal('modalDialog')">&times;</span></div>
+				<div class="modal-body alt">VSMonitor is loading up...</div>
 			</div>
 		</div>
 		<div id="modalVSimport" class="modal">
@@ -58,7 +59,7 @@
 							<div>Load the CSV file(s) here:</div>
 							<div id="VSdropArea">
 								<div style="font-size:400%" class="VSicon"><i class="fas fa-cloud-download-alt"></i></div>
-								<div style="width:80%;text-align:center">Drag and drop the .CSV file(s) from VSCapture here to begin data transfer, or <a onclick="openFileOrFiles()" class="uploadlink">browse to upload</a>.</div>
+								<div style="width:80%;text-align:center">Drag and drop the .CSV file(s) from VSCapture here to begin data transfer<span id="browsefunctionality">, or <a onclick="openFileOrFiles()" class="uploadlink">browse to upload</a>.</span></div>
 							</div>
 							<div id="VSimportmessage">&nbsp;</div>
 						</div><!-- end screen1-->

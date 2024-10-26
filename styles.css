@@ -301,7 +301,13 @@ h3 {
   font-weight: normal;
 }
 
-
+h4 {
+  font-size: 1rem;
+  font-weight: bold;
+  font-style: italic;
+  color: #198964;
+  background: #eee;
+}
 
 /*buttons */
 a.button {

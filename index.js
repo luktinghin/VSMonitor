@@ -7,9 +7,7 @@
  //var dropArea2 = document.getElementById("VSdropArea2");
  var fileEntry = new Array();
  var fileList;
- VSimportdata = {};
- VSimportparams = {};
-
+ 
 //custom web components
 
 class ChartComponent extends HTMLElement {
@@ -546,6 +544,7 @@ const openFileOrFiles = async (multiple = true) => {
   // If the File System Access API is supported…
   if (supportsFileSystemAccess) {
     let fileOrFiles = undefined;
+    document.getElementById("VSimportmessage").innerHTML = "";
     try {
       // Show the file picker, optionally allowing multiple files.
       const handles = await showOpenFilePicker(pickerOp);
@@ -636,6 +635,76 @@ const readFileHandle = async (param_sourceid, param_reload, param_reload_chartid
 			console.log("---reload fileEntry fired, proceed to render data");
 			renderData(sourceData[param_sourceid],"Time",infoObjects[param_reload_chartidnum].label,param_reload_chartidnum);
 	}
+}
+
+function openlabs() {
+	el1 = `
+		<h4>VSimportData(inputData, inputName, inputIndex)</h4>
+		<div>direct import of data, a JSON object, into VSMonitor, suitable for direct injection of data from VScapture</div>
+		<div>parameters:</div>
+		<ul>
+		<li>inputData - JSON object</li>
+		<li>inputName - name of data source, used for creating rows in charts</li>
+		<li>inputIndex - if source data index is known, can provide, otherwise create new. this will overwrite the existing sourcedata.</li>
+		</ul>
+		<div>Input the object as CSV here</div>
+		<textarea style='width:100%' id='customobject'></textarea>
+		Name of this object:<input id='customname'>
+		<div><button onclick='VSimportData(CSVtoJSON(document.getElementById("customobject").value),document.getElementById("customname").value)'>VSimportData</button></div>
+	`
+	displayDialog("Labs",el1);
+}
+function VSimportData(inputData, inputName, inputIndex) {
+	//direct import of data, a JSON object, into VSMonitor
+	//suitable for direct injection of data from VScapture
+	//parameters:
+	//inputData - JSON object
+	//inputName - name of data source, used for creating rows in charts
+	//inputIndex - if source data index is known, can provide, otherwise create new. this will overwrite the existing sourcedata.
+	if (inputIndex == undefined) {
+		sourceData.push(inputData);
+		tempIndex = sourceData.length - 1;
+	} else {
+		sourceData[inputIndex] = new Array();
+		sourceData[inputIndex] = inputData;
+		tempIndex = inputIndex;
+	}
+	sourceDataInfo[tempIndex] = {};
+	sourceDataInfo[tempIndex].method = "internal";
+	sourceDataInfo[tempIndex].name = inputName;
+	sourceDataInfo[tempIndex].variables = Object.keys(sourceData[tempIndex][0]);
+	tempTimeIndex = sourceDataInfo[tempIndex].variables.indexOf("Time");
+	if (tempTimeIndex > -1) {
+		sourceDataInfo[tempIndex].variables.splice(tempTimeIndex,1);
+	}
+	console.log("source data " + tempIndex + " created / " + inputName);
+}
+
+function VSaddData(inputData, inputIndex) {
+	//this function receives new data from the datastream and writes to an exsiting sourceData
+	if (sourceData[inputIndex] == undefined) {
+		sourceData[inputIndex] = new Array();
+	}
+	sourceData.push(inputData);
+}
+
+function VSquerySource(inputName) {
+	//finds the source with given inputName and return the index
+	//return -1 if not found
+	tempIndex = -1;
+	let counter;
+	for (counter=0; counter<sourceData.length; counter++) {
+		if (sourceData[counter] != undefined) {
+			if (sourceDataInfo[counter] != undefined) {
+				if (sourceDataInfo[counter].name != undefined) {
+					if (sourceDataInfo[counter].name == inputName) {
+						break;
+					}
+				}
+			}
+		}
+	}
+	return counter;
 }
 
 function reload(idnum) {
