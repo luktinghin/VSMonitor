@@ -231,6 +231,10 @@ button, select, input {
   transition: transform 300ms ease-in-out;
 }
 
+.modal.full {
+  padding-top: 5vw;
+}
+
 .close {
     color:grey;
     float: right;
@@ -265,6 +269,13 @@ button, select, input {
   padding-bottom:20px;
   overflow-y:auto; 
   max-height: 70dvh;
+}
+
+.modal.full .modal-content {
+  width: 90%;
+}
+.modal.full .modal-body {
+  max-height: 81dvh;
 }
 
 #main-welcome {

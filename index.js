@@ -416,6 +416,14 @@ function displayDialog(dialogTitle, dialogContent) {
 	setmodal("modalDialog");
 }
 
+function displayDialogFull(dialogTitle, dialogContent) {
+	const ElTitle = document.querySelector("#modalDialogFull .title");
+	const ElContent = document.querySelector("#modalDialogFull .modal-body");
+	ElTitle.innerHTML = dialogTitle;
+	ElContent.innerHTML = dialogContent;
+	setmodal("modalDialogFull");
+}
+
 function setmodal(modalname) {
   modal = document.getElementById(modalname);
   modalcontent = document.getElementById(modalname + "content");
@@ -507,11 +515,6 @@ function readData3(data, param_sourceid, filetype, param_reload, param_reload_ch
 		param1 = param_sourceid + 1;
 		prefix = "(" + param1 + "/" + fileEntryLength + ") ";
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
-		if ((sourceData[param_sourceid].length > 0) && (sourceData[param_sourceid][0].Time != undefined)) {
-			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param_sourceid].name + " - data loaded successfully: " + tempLength + " entries<br>";	
-		} else {
-			document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param_sourceid].name + " - file read but no suitable data detected.<br>";	
-		}
 		sourceDataInfo[param_sourceid] = {};
 		sourceDataInfo[param_sourceid].method = "entry";
 		sourceDataInfo[param_sourceid].name = fileEntry[param_sourceid].name;
@@ -524,6 +527,12 @@ function readData3(data, param_sourceid, filetype, param_reload, param_reload_ch
 			//force reload of graphics, after reloading of fileEntry
 			console.log("---reload fileEntry fired, proceed to render data");
 			renderData(sourceData[param_sourceid],"Time",infoObjects[param_reload_chartidnum].label,param_reload_chartidnum);
+		} else {
+			if ((sourceData[param_sourceid].length > 0) && (sourceData[param_sourceid][0].Time != undefined)) {
+				document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param_sourceid].name + " - data loaded successfully: " + tempLength + " entries<br>";	
+			} else {
+				document.getElementById("VSimportmessage").innerHTML += prefix + fileEntry[param_sourceid].name + " - file read but no suitable data detected.<br>";	
+			}
 		}
 	} else {
 		document.getElementById("VSimportmessage").innerHTML = "Fatal error: unrecognized file."
@@ -633,11 +642,7 @@ const readFileHandle = async (param_sourceid, param_reload, param_reload_chartid
 		param1 = param_sourceid + 1;
 		prefix = "(" + param1 + "/" + fileEntryLength + ") ";
 		document.getElementById("VSimportconfirmbtn").classList.remove("disabled");
-		if ((sourceData[param_sourceid].length > 0) && (sourceData[param_sourceid][0].Time != undefined)) {
-			document.getElementById("VSimportmessage").innerHTML += prefix + fileHandle[param_sourceid].name + " - data loaded successfully: " + tempLength + " entries<br>";	
-		} else {
-			document.getElementById("VSimportmessage").innerHTML += prefix + fileHandle[param_sourceid].name + " - file read but no suitable data detected.<br>";	
-		}
+
 	sourceDataInfo[param_sourceid] = {};
 	sourceDataInfo[param_sourceid].method = "handle";
 	sourceDataInfo[param_sourceid].name = fileHandle[param_sourceid].name;
@@ -650,6 +655,12 @@ const readFileHandle = async (param_sourceid, param_reload, param_reload_chartid
 			//force reload of graphics, after reloading of fileEntry
 			console.log("---reload fileEntry fired, proceed to render data");
 			renderData(sourceData[param_sourceid],"Time",infoObjects[param_reload_chartidnum].label,param_reload_chartidnum);
+	} else {
+		if ((sourceData[param_sourceid].length > 0) && (sourceData[param_sourceid][0].Time != undefined)) {
+			document.getElementById("VSimportmessage").innerHTML += prefix + fileHandle[param_sourceid].name + " - data loaded successfully: " + tempLength + " entries<br>";	
+		} else {
+			document.getElementById("VSimportmessage").innerHTML += prefix + fileHandle[param_sourceid].name + " - file read but no suitable data detected.<br>";	
+		}
 	}
 }
 
@@ -683,7 +694,7 @@ function openlabs() {
 		<input id='customqueryname'>
 		<div><button onclick='alert("the sourceData index for this name is " + VSquerySource(document.getElementById("customqueryname").value))'>Query Source</button></div>
 	`
-	displayDialog("Labs",el1);
+	displayDialogFull("Labs",el1);
 }
 function VSimportData(inputData, inputName, inputIndex) {
 	//direct import of data, a JSON object, into VSMonitor
@@ -742,13 +753,27 @@ function VSquerySource(inputName) {
 	return counter;
 }
 
+var loop1;
+
+function VSrefreshAll(interval) {
+	if (interval == undefined) {
+		interval = 5000;
+	}
+	loop1 = setInterval(reloadAll, interval);
+	console.log('refreshing all charts, interval ' + interval);
+}
+
+function VSrefreshStop() {
+	clearInterval(loop1);
+}
+
 function reload(idnum) {
 	tempSourceID = infoObjects[idnum].sourceid;
 	if (sourceDataInfo[tempSourceID].method == "entry") {
 		//loaded as datatransfer entry
 		handleFile(fileEntry[tempSourceID],readData3,errorData,tempSourceID,true,idnum);
 	} else if (sourceDataInfo[tempSourceID].method == "handle") {
-		readFileHandle(tempSourceID);
+		readFileHandle(tempSourceID,true,idnum);
 	} else if (sourceDataInfo[tempSourceID].method == "internal") {
 		renderData(sourceData[tempSourceID],"Time",infoObjects[idnum].label,idnum);
 	}
